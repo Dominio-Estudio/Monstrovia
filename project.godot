@@ -17,6 +17,7 @@ _global_script_class_icons={
 
 config/name="Monstrovia3D"
 run/main_scene="res://Inicio/Inicio.tscn"
+boot_splash/image="res://portada-dominio.png"
 config/icon="res://icon.png"
 
 [autoload]
