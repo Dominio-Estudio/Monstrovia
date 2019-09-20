@@ -1,19 +1,36 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://ui/ui_theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/ButtonExpand.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/HUD/keyX.png" type="Texture" id=2]
 [ext_resource path="res://ui/ButtonBehavior.gd" type="Script" id=3]
 [ext_resource path="res://ui/HUD/reloj.png" type="Texture" id=4]
 [ext_resource path="res://ui/HUD/progress_bar.png" type="Texture" id=5]
 [ext_resource path="res://ui/HUD/Recurso 37_1.png" type="Texture" id=6]
 [ext_resource path="res://ui/HUD/Recurso 35.png" type="Texture" id=7]
+[ext_resource path="res://ui/HUD/2019-09-17-2.png" type="Texture" id=8]
+[ext_resource path="res://ui/HUD/keyZ.png" type="Texture" id=9]
+[ext_resource path="res://ui/ButtonExpand.tscn" type="PackedScene" id=10]
+[ext_resource path="res://ui/HUD/KeyboardHints.gd" type="Script" id=11]
 [ext_resource path="res://ui/Reloj.gd" type="Script" id=12]
+[ext_resource path="res://ui/HUD/HUD.gd" type="Script" id=13]
+[ext_resource path="res://ui/Comfortaa-Bold.ttf" type="DynamicFontData" id=14]
 [ext_resource path="res://ui/Fuente_texto.tres" type="Theme" id=15]
 [ext_resource path="res://ui/panel_ui_theme.tres" type="StyleBox" id=16]
 [ext_resource path="res://ui/Recurso 38.png" type="Texture" id=17]
 [ext_resource path="res://ui/HUD/boton_pausa.png" type="Texture" id=18]
 [ext_resource path="res://addons/HoverTextureButton/HoverTextureButton.gd" type="Script" id=19]
 [ext_resource path="res://addons/HoverTextureButton/icon.png" type="Texture" id=20]
+[ext_resource path="res://ui/HUD/2019-09-16-3.png" type="Texture" id=21]
+[ext_resource path="res://ui/HUD/2019-09-16-4.png" type="Texture" id=22]
+[ext_resource path="res://ui/HUD/keyUp.png" type="Texture" id=23]
+[ext_resource path="res://ui/HUD/keyDown.png" type="Texture" id=24]
+
+[sub_resource type="DynamicFont" id=3]
+size = 21
+font_data = ExtResource( 14 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "desplegar"
@@ -28,7 +45,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, -750 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, -600 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath("..")
@@ -45,7 +62,39 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=2]
+resource_name = "replegar"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -600 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "toggle_pause"
+} ]
+}
+
 [node name="UI" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 13 )
 
 [node name="HUD" type="Control" parent="."]
 pause_mode = 2
@@ -74,11 +123,23 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="HUD/TextureRect"]
-margin_left = 44.0
-margin_top = 46.0
-margin_right = 171.0
-margin_bottom = 103.0
+margin_left = 12.8193
+margin_top = 30.7413
+margin_right = 139.819
+margin_bottom = 87.7413
 text = "30:00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DistanceLabel" type="Label" parent="HUD/TextureRect"]
+margin_left = 23.0
+margin_top = 75.0
+margin_right = 187.0
+margin_bottom = 99.0
+theme = SubResource( 4 )
+text = "20Km"
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -147,7 +208,7 @@ align = 1
 valign = 1
 autowrap = true
 
-[node name="Button" parent="HUD/Tutorial/Panel" instance=ExtResource( 2 )]
+[node name="Button" parent="HUD/Tutorial/Panel" instance=ExtResource( 10 )]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -158,13 +219,163 @@ margin_right = 62.0
 margin_bottom = -37.0
 text = "OK"
 
+[node name="Speed" type="ColorRect" parent="HUD"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 29.9169
+margin_top = -84.0526
+margin_right = 232.917
+margin_bottom = -21.0526
+color = Color( 0.984314, 0.501961, 0.00392157, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD/Speed"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -84.5
+margin_top = -23.0
+margin_right = 84.5
+margin_bottom = 23.0
+text = "00 Km/h"
+
+[node name="HandLeftTouch" type="TouchScreenButton" parent="HUD"]
+position = Vector2( 171.76, 188.204 )
+rotation = -3.14159
+scale = Vector2( 0.54, -0.54 )
+normal = ExtResource( 8 )
+
+[node name="HandLeft" type="TextureButton" parent="HUD"]
+visible = false
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 171.76
+margin_top = -111.796
+margin_right = 415.76
+margin_bottom = 81.2041
+rect_scale = Vector2( -0.54, 0.54 )
+texture_normal = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Freno" type="TextureButton" parent="HUD"]
+visible = false
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 171.76
+margin_top = 37.1293
+margin_right = 415.76
+margin_bottom = 230.129
+rect_scale = Vector2( -0.54, 0.54 )
+texture_normal = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PedalTouch" type="TouchScreenButton" parent="HUD"]
+position = Vector2( 900, 343 )
+rotation = 1.50996e-07
+scale = Vector2( 0.54, 0.54 )
+normal = ExtResource( 22 )
+
+[node name="FrenoTouch" type="TouchScreenButton" parent="HUD"]
+position = Vector2( 55.1361, 343 )
+rotation = 1.50996e-07
+scale = Vector2( 0.54, 0.54 )
+normal = ExtResource( 21 )
+
+[node name="Pedal" type="TextureButton" parent="HUD"]
+visible = false
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 1006.6
+margin_top = 37.1293
+margin_right = 1250.6
+margin_bottom = 235.129
+rect_scale = Vector2( -0.54, 0.54 )
+texture_normal = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HandRightTouch" type="TouchScreenButton" parent="HUD"]
+position = Vector2( 890, 187.5 )
+rotation = -3.14159
+scale = Vector2( -0.54, -0.54 )
+normal = ExtResource( 8 )
+
+[node name="HandRight" type="TextureButton" parent="HUD"]
+visible = false
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -133.289
+margin_top = -112.5
+margin_right = 110.711
+margin_bottom = 80.5
+rect_scale = Vector2( 0.500522, 0.500522 )
+texture_normal = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyX" type="TextureRect" parent="HUD"]
+margin_left = 925.773
+margin_top = 263.743
+margin_right = 975.773
+margin_bottom = 305.743
+texture = ExtResource( 2 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyZ" type="TextureRect" parent="HUD"]
+margin_left = 85.2047
+margin_top = 263.743
+margin_right = 135.205
+margin_bottom = 305.743
+texture = ExtResource( 9 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyUp" type="TextureRect" parent="HUD"]
+margin_left = 925.773
+margin_top = 425.555
+margin_right = 975.773
+margin_bottom = 467.555
+texture = ExtResource( 23 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyDown" type="TextureRect" parent="HUD"]
+margin_left = 85.2047
+margin_top = 425.555
+margin_right = 135.205
+margin_bottom = 467.555
+texture = ExtResource( 24 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Pausa" type="Control" parent="HUD"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 2.39166
-margin_top = -599.326
-margin_right = 2.3916
-margin_bottom = -599.326
+margin_top = -600.0
+margin_right = -6.10352e-05
+margin_bottom = -600.0
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
@@ -233,37 +444,17 @@ rect_pivot_offset = Vector2( 100, 42.5 )
 texture_normal = ExtResource( 18 )
 script = ExtResource( 19 )
 __meta__ = {
+"_edit_use_anchors_": false,
 "_editor_icon": ExtResource( 20 )
 }
 action = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/Pausa"]
 anims/desplegar = SubResource( 1 )
-
-[node name="Speed" type="ColorRect" parent="HUD"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 29.9169
-margin_top = -84.0526
-margin_right = 232.917
-margin_bottom = -21.0526
-color = Color( 0.984314, 0.501961, 0.00392157, 1 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="HUD/Speed"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -84.5
-margin_top = -23.0
-margin_right = 84.5
-margin_bottom = 23.0
-text = "00 Km/h"
+anims/replegar = SubResource( 2 )
 [connection signal="button_up" from="HUD/Tutorial/Panel/Button" to="HUD" method="_on_Button_button_up"]
+[connection signal="pressed" from="HUD/Pausa/PanelContainer/VBoxContainer/Continuar" to="." method="_on_Continuar_pressed"]
 [connection signal="pressed" from="HUD/Pausa/PanelContainer/VBoxContainer/Continuar" to="HUD" method="_on_continuar"]
+[connection signal="pressed" from="HUD/Pausa/PanelContainer/VBoxContainer/Salir" to="." method="_on_Salir_pressed"]
 [connection signal="pressed" from="HUD/Pausa/PanelContainer/VBoxContainer/Salir" to="HUD" method="_on_Salir_pressed"]
-[connection signal="pressed" from="HUD/Pausa/HoverTextureButton" to="HUD" method="_on_pausa"]
+[connection signal="pressed" from="HUD/Pausa/HoverTextureButton" to="." method="_on_pausa"]
