@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://world/Woods.material" type="Material" id=1]
+[ext_resource path="res://world/trees/naturePack_063.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://world/trees/naturePack_flat_003.obj" type="ArrayMesh" id=3]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 5, 15 )
+
+[sub_resource type="MultiMesh" id=2]
+transform_format = 1
+instance_count = 5
+mesh = ExtResource( 2 )
+transform_array = PoolVector3Array( 0, 0, -1, 0, 1, 0, 1, 0, 0, 2.88806, 1, 5.67056, -1, 0, 0, 0, 1, 0, 0, 0, -1, 3.35382, 1, -1.37664, -1, 0, 0, 0, 1, 0, 0, 0, -1, 2.18954, 1, 2.25284, 0, 0, -1, 0, 1, 0, 1, 0, 0, 5.49756, 1, 2.53981, -1, 0, 0, 0, 1, 0, 0, 0, -1, 3.3989, 1, -0.246962 )
+
+[sub_resource type="MultiMesh" id=3]
+transform_format = 1
+instance_count = 15
+mesh = ExtResource( 3 )
+transform_array = PoolVector3Array( 0, 0, -1, 0, 1, 0, 1, 0, 0, 4.62322, 0.975628, 3.76232, 0, 0, -1, 0, 1, 0, 1, 0, 0, 4.36853, 0.975628, 6.36211, -1, 0, 0, 0, 1, 0, 0, 0, -1, 1.47022, 0.975628, 0.0597953, 0, 0, -1, 0, 1, 0, 1, 0, 0, 3.83531, 0.975628, 3.98165, 0, 0, -1, 0, 1, 0, 1, 0, 0, 6.23356, 0.975628, -1.95466, 0, 0, -1, 0, 1, 0, 1, 0, 0, 5.51342, 0.975628, 3.4444, 0, 0, -1, 0, 1, 0, 1, 0, 0, 5.20559, 0.975628, -0.378287, 0, 0, -1, 0, 1, 0, 1, 0, 0, 3.93883, 0.975628, 6.54247, 0, 0, -1, 0, 1, 0, 1, 0, 0, 2.10035, 0.975628, 8.30688, -1, 0, 0, 0, 1, 0, 0, 0, -1, 1.41527, 0.975628, 1.12191, 0, 0, -1, 0, 1, 0, 1, 0, 0, 4.82452, 0.975628, 9.30365, 0, 0, -1, 0, 1, 0, 1, 0, 0, 5.42939, 0.975628, 9.48279, -1, 0, 0, 0, 1, 0, 0, 0, -1, 2.61498, 0.975628, -0.68468, 0, 0, -1, 0, 1, 0, 1, 0, 0, 4.39748, 0.975628, 3.27986, -1, 0, 0, 0, 1, 0, 0, 0, -1, 5.52589, 0.975628, -2.76298 )
+
+[node name="Woods" type="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.855, 0.5, 15.383 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="Tree1" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8552, -1, -10.3828 )
+visible = false
+mesh = ExtResource( 2 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+material/7 = null
+material/8 = null
+material/9 = null
+material/10 = null
+material/11 = null
+material/12 = null
+material/13 = null
+material/14 = null
+material/15 = null
+material/16 = null
+material/17 = null
+material/18 = null
+material/19 = null
+material/20 = null
+material/21 = null
+
+[node name="Tree4" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9834, 0, 9.73583 )
+visible = false
+mesh = ExtResource( 3 )
+material/0 = null
+
+[node name="MultiMeshInstance" type="MultiMeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.85515, -1, -2.38276 )
+multimesh = SubResource( 2 )
+
+[node name="MultiMeshInstance4" type="MultiMeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.82977, -0.975628, -2.37244 )
+multimesh = SubResource( 3 )

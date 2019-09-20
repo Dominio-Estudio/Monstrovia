@@ -1,0 +1,269 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://ui/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/ButtonExpand.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/ButtonBehavior.gd" type="Script" id=3]
+[ext_resource path="res://ui/HUD/reloj.png" type="Texture" id=4]
+[ext_resource path="res://ui/HUD/progress_bar.png" type="Texture" id=5]
+[ext_resource path="res://ui/HUD/Recurso 37_1.png" type="Texture" id=6]
+[ext_resource path="res://ui/HUD/Recurso 35.png" type="Texture" id=7]
+[ext_resource path="res://ui/Reloj.gd" type="Script" id=12]
+[ext_resource path="res://ui/Fuente_texto.tres" type="Theme" id=15]
+[ext_resource path="res://ui/panel_ui_theme.tres" type="StyleBox" id=16]
+[ext_resource path="res://ui/Recurso 38.png" type="Texture" id=17]
+[ext_resource path="res://ui/HUD/boton_pausa.png" type="Texture" id=18]
+[ext_resource path="res://addons/HoverTextureButton/HoverTextureButton.gd" type="Script" id=19]
+[ext_resource path="res://addons/HoverTextureButton/icon.png" type="Texture" id=20]
+
+[sub_resource type="Animation" id=1]
+resource_name = "desplegar"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -750 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "toggle_pause"
+} ]
+}
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="HUD" type="Control" parent="."]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -3.0
+margin_bottom = -3.0
+mouse_filter = 2
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="HUD"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -332.161
+margin_top = 11.6635
+margin_right = -22.1606
+margin_bottom = 135.664
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD/TextureRect"]
+margin_left = 44.0
+margin_top = 46.0
+margin_right = 171.0
+margin_bottom = 103.0
+text = "30:00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Salud" type="TextureProgress" parent="HUD"]
+margin_left = 64.0
+margin_top = 45.0
+margin_right = 421.0
+margin_bottom = 74.0
+mouse_filter = 0
+size_flags_vertical = 0
+value = 80.0
+texture_under = ExtResource( 6 )
+texture_progress = ExtResource( 5 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Icono" type="TextureRect" parent="HUD/Salud"]
+margin_left = -21.0
+margin_top = -13.0
+margin_right = 44.0
+margin_bottom = 46.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Reloj" type="Node2D" parent="HUD"]
+visible = false
+position = Vector2( 670.5, 390 )
+script = ExtResource( 12 )
+
+[node name="Reloj" type="Sprite" parent="HUD/Reloj"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HUD/Reloj"]
+pitch_scale = 0.8
+
+[node name="Tutorial" type="Panel" parent="HUD"]
+visible = false
+self_modulate = Color( 0, 0, 0, 0.309412 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 15 )
+
+[node name="Panel" type="Panel" parent="HUD/Tutorial"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -309.0
+margin_top = -134.5
+margin_right = 309.0
+margin_bottom = 134.5
+
+[node name="Label" type="Label" parent="HUD/Tutorial/Panel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -249.0
+margin_top = 22.0
+margin_right = 252.0
+margin_bottom = 133.0
+text = "Antes de empezar puedes elegir si usar casco o calentar"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Button" parent="HUD/Tutorial/Panel" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -65.0
+margin_top = -82.0
+margin_right = 62.0
+margin_bottom = -37.0
+text = "OK"
+
+[node name="Pausa" type="Control" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.39166
+margin_top = -599.326
+margin_right = 2.3916
+margin_bottom = -599.326
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/Pausa"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = ExtResource( 16 )
+
+[node name="Recurso 38" type="TextureRect" parent="HUD/Pausa/PanelContainer"]
+margin_right = 1024.0
+margin_bottom = 600.0
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Pausa/PanelContainer"]
+margin_left = 261.0
+margin_top = 118.0
+margin_right = 761.0
+margin_bottom = 482.0
+rect_min_size = Vector2( 500, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="HUD/Pausa/PanelContainer/VBoxContainer"]
+margin_right = 500.0
+margin_bottom = 46.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "PAUSA"
+align = 1
+
+[node name="Continuar" type="Button" parent="HUD/Pausa/PanelContainer/VBoxContainer"]
+margin_top = 96.0
+margin_right = 500.0
+margin_bottom = 152.0
+text = "Continuar"
+script = ExtResource( 3 )
+
+[node name="Salir" type="Button" parent="HUD/Pausa/PanelContainer/VBoxContainer"]
+margin_top = 202.0
+margin_right = 500.0
+margin_bottom = 258.0
+text = "Salir"
+script = ExtResource( 3 )
+
+[node name="Ajustes" type="Button" parent="HUD/Pausa/PanelContainer/VBoxContainer"]
+margin_top = 308.0
+margin_right = 500.0
+margin_bottom = 364.0
+disabled = true
+text = "Ajustes"
+script = ExtResource( 3 )
+
+[node name="HoverTextureButton" type="TextureButton" parent="HUD/Pausa"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -100.5
+margin_top = -5.0
+margin_right = 99.5
+margin_bottom = 80.0
+rect_pivot_offset = Vector2( 100, 42.5 )
+texture_normal = ExtResource( 18 )
+script = ExtResource( 19 )
+__meta__ = {
+"_editor_icon": ExtResource( 20 )
+}
+action = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/Pausa"]
+anims/desplegar = SubResource( 1 )
+
+[node name="Speed" type="ColorRect" parent="HUD"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 29.9169
+margin_top = -84.0526
+margin_right = 232.917
+margin_bottom = -21.0526
+color = Color( 0.984314, 0.501961, 0.00392157, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD/Speed"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -84.5
+margin_top = -23.0
+margin_right = 84.5
+margin_bottom = 23.0
+text = "00 Km/h"
+[connection signal="button_up" from="HUD/Tutorial/Panel/Button" to="HUD" method="_on_Button_button_up"]
+[connection signal="pressed" from="HUD/Pausa/PanelContainer/VBoxContainer/Continuar" to="HUD" method="_on_continuar"]
+[connection signal="pressed" from="HUD/Pausa/PanelContainer/VBoxContainer/Salir" to="HUD" method="_on_Salir_pressed"]
+[connection signal="pressed" from="HUD/Pausa/HoverTextureButton" to="HUD" method="_on_pausa"]

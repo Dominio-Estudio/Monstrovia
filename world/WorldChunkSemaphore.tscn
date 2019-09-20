@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://world/road/road.material" type="Material" id=1]
+[ext_resource path="res://world/road/anden.material" type="Material" id=2]
+[ext_resource path="res://world/Woods2.tscn" type="PackedScene" id=3]
+[ext_resource path="res://world/buildings/edificio2/edificio2.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://world/buildings/hospital/Hospital.material" type="Material" id=5]
+[ext_resource path="res://world/buildings/hospital/01hospitalModel.obj" type="ArrayMesh" id=6]
+[ext_resource path="res://world/objects/Semaphore.tscn" type="PackedScene" id=7]
+[ext_resource path="res://world/buildings/edificio2/edificio2.material" type="Material" id=8]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="CubeMesh" id=2]
+
+[node name="WorldChunk" type="Spatial" groups=[
+"world_chunks",
+]]
+
+[node name="Carretera" type="MeshInstance" parent="."]
+transform = Transform( 10, 0, 0, 0, 0.997, 0, 0, 0, 30, 0, 0, 0 )
+material_override = ExtResource( 1 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="AndenDer" type="MeshInstance" parent="."]
+transform = Transform( 18, 0, 0, 0, 0.997, 0, 0, 0, 30, -28, -0.5, 0 )
+mesh = SubResource( 2 )
+material/0 = ExtResource( 2 )
+
+[node name="AndenIzq" type="MeshInstance" parent="."]
+transform = Transform( 18, 0, 0, 0, 0.997, 0, 0, 0, 30, 28, -0.5, 0 )
+mesh = SubResource( 2 )
+material/0 = ExtResource( 2 )
+
+[node name="Spatial2" type="Spatial" parent="."]
+transform = Transform( -1, 0, -8.74227e-08, 0, 0.999998, 0, 8.74227e-08, 0, -0.999998, 34, 0, -11.0001 )
+
+[node name="Semaphore" parent="." groups=[
+"semaphore",
+] instance=ExtResource( 7 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 11, 0, 0 )
+
+[node name="CollisionShape" parent="Semaphore" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9683, 5.02988, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -27.1141, 0.00012207, -18.5596 )
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 8 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 31.8859, 0.00012207, 13.4404 )
+material_override = ExtResource( 8 )
+mesh = ExtResource( 4 )
+material/0 = null
+
+[node name="Woods" parent="MeshInstance4" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6345, 0.681225, -5.60447 )
+
+[node name="Woods2" parent="MeshInstance4" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3655, 0.681225, -5.60447 )
+
+[node name="Woods3" parent="MeshInstance4" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.36549, 0.681225, -59.6045 )
+
+[node name="Woods4" parent="MeshInstance4" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3655, 0.681225, -60.6045 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -27.1141, 0.00012207, 7.44043 )
+material_override = ExtResource( 5 )
+mesh = ExtResource( 6 )
+material/0 = null
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 24.8859, 0.00012207, -18.5596 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 5 )
+
+[editable path="Semaphore"]

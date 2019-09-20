@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Mounstruo.ogg-9133589a7c77d7c5726da5bd974fae8f.oggstr"
+
+[deps]
+
+source_file="res://road_users/common/sounds/Mounstruo.ogg"
+dest_files=[ "res://.import/Mounstruo.ogg-9133589a7c77d7c5726da5bd974fae8f.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://bicycle_level/Main.gd" type="Script" id=1]
+[ext_resource path="res://env/fog_env.tres" type="Environment" id=2]
+[ext_resource path="res://bicycle_level/Camera.gd" type="Script" id=3]
+[ext_resource path="res://world/WorldChunkCicloRuta.tscn" type="PackedScene" id=4]
+[ext_resource path="res://road_users/cyclist/Jugador.tscn" type="PackedScene" id=5]
+[ext_resource path="res://road_users/common/sounds/Mounstruo.ogg" type="AudioStream" id=6]
+[ext_resource path="res://bicycle_level/music/background_music.ogg" type="AudioStream" id=7]
+[ext_resource path="res://ui/HUD/HUD.tscn" type="PackedScene" id=8]
+
+[node name="Main" type="Spatial" groups=[
+"environment",
+]]
+script = ExtResource( 1 )
+traffic_density = 30
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -1, -3.55271e-14, -3.25841e-07, -1.18913e-07, 0.93103, 0.364942, 3.03368e-07, 0.364942, -0.93103, -6.99951, 6.81934, -8.1889 )
+environment = ExtResource( 2 )
+current = true
+script = ExtResource( 3 )
+target = NodePath("../Jugador")
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.975335, 0.190251, -0.111923, 0, 0.507057, 0.861913, 0.220732, -0.840653, 0.49455, 0, 12.7533, 15.5834 )
+
+[node name="WorldChunk" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148926, -0.0292969, -0.0314331 )
+visible = false
+
+[node name="DebugCamera" type="Camera" parent="."]
+transform = Transform( -0.422618, -0.896472, 0.133163, 0, 0.146929, 0.989147, -0.906308, 0.418032, -0.0620948, 6.46083, 226.115, -34.0127 )
+far = 200.0
+
+[node name="Jugador" parent="." instance=ExtResource( 5 )]
+transform = Transform( 2.38439, 0, 0, 0, 2.38439, 0, 0, 0, 2.38439, -7, 0, 0 )
+health_indicator_path = NodePath("../UI/HUD/Salud")
+
+[node name="SpawnPointsFront" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100 )
+
+[node name="Linea1" type="Position3D" parent="SpawnPointsFront"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80995, 0, 0 )
+
+[node name="Slot1" type="Position3D" parent="SpawnPointsFront"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.80995, 0, 0 )
+
+[node name="Slot2" type="Position3D" parent="SpawnPointsFront"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0393505, 0, 0 )
+
+[node name="Slot3" type="Position3D" parent="SpawnPointsFront"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.16109, 0, 0 )
+
+[node name="Linea2" type="Position3D" parent="SpawnPointsFront"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11656, 0, 0 )
+
+[node name="UI" parent="." instance=ExtResource( 8 )]
+
+[node name="MonstrificationSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+bus = "SoundEffects"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+autoplay = true
+mix_target = 1
+bus = "BackgroundMusic"
+
+[editable path="UI"]

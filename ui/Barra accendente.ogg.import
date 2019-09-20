@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Barra accendente.ogg-6697d700a828680ba03cdaa6ea9cf777.oggstr"
+
+[deps]
+
+source_file="res://ui/Barra accendente.ogg"
+dest_files=[ "res://.import/Barra accendente.ogg-6697d700a828680ba03cdaa6ea9cf777.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

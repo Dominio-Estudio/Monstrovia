@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Intro/Video-intro-Monstrovia.ogv" type="VideoStream" id=1]
+[ext_resource path="res://Intro/Intro.gd" type="Script" id=2]
+[ext_resource path="res://ui/h1.tres" type="Theme" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0705882, 0.0588235, 0.0588235, 0.67451 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="Animation" id=2]
+resource_name = "default"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Button:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9, 2, 4.87918 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="VideoPlayer" type="VideoPlayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stream = ExtResource( 1 )
+autoplay = true
+script = ExtResource( 2 )
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -124.0
+margin_top = -68.0
+margin_right = -22.0
+margin_bottom = -14.0
+theme = ExtResource( 3 )
+custom_styles/normal = SubResource( 1 )
+text = "Omitir"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/default = SubResource( 2 )
+[connection signal="finished" from="." to="." method="_on_VideoPlayer_finished"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

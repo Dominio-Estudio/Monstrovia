@@ -1,0 +1,171 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Inicio/Inicio.gd" type="Script" id=1]
+[ext_resource path="res://Inicio/pantalla fondo inicio.png" type="Texture" id=2]
+[ext_resource path="res://Inicio/Recurso 73.png" type="Texture" id=3]
+[ext_resource path="res://Inicio/Recurso 39.png" type="Texture" id=4]
+[ext_resource path="res://Inicio/BotonInicio.gd" type="Script" id=5]
+[ext_resource path="res://addons/HoverTextureButton/click.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Inicio/menu.ogg" type="AudioStream" id=7]
+[ext_resource path="res://ui/boton avatar.png" type="Texture" id=8]
+[ext_resource path="res://addons/HoverTextureButton/icon.png" type="Texture" id=9]
+
+[sub_resource type="Animation" id=1]
+resource_name = "ButtonAtention"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Button:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.1, 1.1 ), Vector2( 1, 1 ), Vector2( 1.1, 1.1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Logo:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 155.5, -300 ), Vector2( 155.5, -300 ), Vector2( 155.5, 50 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Button:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="GDScript" id=3]
+script/source = "# Creado por Juan Velandia (juankz.github.io) para Dominio Estudio. 2018
+tool
+extends TextureButton
+
+enum ACTION {
+	ZOOM, FLOAT
+}
+
+export(ACTION) var action = 0
+
+func _enter_tree():
+	rect_pivot_offset = rect_size/2
+	connect(\"button_down\",self,\"_on_Button_button_down\")
+	connect(\"button_up\",self,\"_on_Button_button_up\")
+	
+func _on_Button_button_down():
+	print(action)
+	match action :
+		ACTION.ZOOM:
+			rect_scale=Vector2(1.2,1.2)
+		ACTION.FLOAT:
+			rect_position.y -= 10
+
+
+func _on_Button_button_up():
+	match action :
+		ACTION.ZOOM:
+			rect_scale=Vector2(1,1)
+		ACTION.FLOAT:
+			rect_position.y += 10
+"
+
+[node name="Sprite" type="Control"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -512.0
+margin_right = 512.0
+margin_bottom = 600.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -174.0
+margin_top = -102.0
+margin_right = 132.0
+margin_bottom = 77.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Logo" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -356.5
+margin_top = 50.0
+margin_right = 356.5
+margin_bottom = 270.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Button" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -103.0
+margin_top = -155.291
+margin_right = 103.0
+margin_bottom = -63.2911
+rect_pivot_offset = Vector2( 103, 46 )
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 4 )
+texture_focused = ExtResource( 4 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Button"]
+stream = ExtResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Inicio"
+anims/ButtonAtention = SubResource( 1 )
+anims/Inicio = SubResource( 2 )
+next/Inicio = "ButtonAtention"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+autoplay = true
+
+[node name="Personalizacion" type="TextureButton" parent="."]
+visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 19.0
+margin_top = -119.0
+margin_right = 147.0
+margin_bottom = -23.0
+rect_pivot_offset = Vector2( 64, 48 )
+texture_normal = ExtResource( 8 )
+expand = true
+script = SubResource( 3 )
+__meta__ = {
+"_editor_icon": ExtResource( 9 )
+}
+action = 0
+[connection signal="pressed" from="Personalizacion" to="." method="ir_a_personalizacion"]

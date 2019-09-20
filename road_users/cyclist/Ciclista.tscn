@@ -1,0 +1,115 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://road_users/cyclist/ciclista.dae" type="PackedScene" id=1]
+[ext_resource path="res://road_users/cyclist/ciclista/casco.material" type="Material" id=2]
+[ext_resource path="res://road_users/cyclist/ciclista/personaje.material" type="Material" id=3]
+[ext_resource path="res://road_users/cyclist/ciclista/ride1.anim" type="Animation" id=4]
+[ext_resource path="res://road_users/cyclist/ciclista/stagger.anim" type="Animation" id=5]
+[ext_resource path="res://road_users/cyclist/ciclista/marco_001.material" type="Material" id=6]
+[ext_resource path="res://road_users/cyclist/ciclista/llantaAtras_001.material" type="Material" id=7]
+[ext_resource path="res://road_users/cyclist/ciclista/plato_001.material" type="Material" id=8]
+[ext_resource path="res://road_users/cyclist/ciclista/pedalL_001.material" type="Material" id=9]
+[ext_resource path="res://road_users/cyclist/ciclista/bielaR_001.material" type="Material" id=10]
+[ext_resource path="res://road_users/cyclist/ciclista/pedalR_001.material" type="Material" id=11]
+[ext_resource path="res://road_users/cyclist/ciclista/sillin_001.material" type="Material" id=12]
+[ext_resource path="res://road_users/cyclist/ciclista/llantaAdelante_001.material" type="Material" id=13]
+[ext_resource path="res://road_users/cyclist/ciclista/timon.material" type="Material" id=14]
+[ext_resource path="res://road_users/cyclist/ciclista/tenedor_001.material" type="Material" id=15]
+[ext_resource path="res://road_users/cyclist/ciclista/montar.anim" type="Animation" id=16]
+[ext_resource path="res://road_users/cyclist/ciclista/look_sides.anim" type="Animation" id=17]
+[ext_resource path="res://road_users/cyclist/ciclista/left_hand.anim" type="Animation" id=18]
+[ext_resource path="res://road_users/cyclist/ciclista/right_hand.anim" type="Animation" id=19]
+[ext_resource path="res://road_users/cyclist/ciclista/crash.anim" type="Animation" id=20]
+[ext_resource path="res://road_users/cyclist/ciclista/turn_left.anim" type="Animation" id=21]
+[ext_resource path="res://road_users/cyclist/ciclista/turn_right.anim" type="Animation" id=22]
+
+[sub_resource type="AnimationNodeAnimation" id=1]
+animation = "montar"
+
+[sub_resource type="AnimationNodeAnimation" id=2]
+animation = "ride1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=3]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachine" id=4]
+states/montar/node = SubResource( 1 )
+states/montar/position = Vector2( 48, 48 )
+states/ride1/node = SubResource( 2 )
+states/ride1/position = Vector2( 265, 48 )
+transitions = [ "montar", "ride1", SubResource( 3 ) ]
+graph_offset = Vector2( -122, -31 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=5]
+
+[node name="ciclista" index="0" instance=ExtResource( 1 )]
+
+[node name="personObj" parent="ArmaturePerson/Skeleton" index="0"]
+material_override = ExtResource( 3 )
+material/0 = ExtResource( 3 )
+
+[node name="casco" parent="." index="1"]
+transform = Transform( 0.0211725, -0.0652786, -0.162221, -0.00623236, 0.16302, -0.0664136, 0.174752, 0.013723, 0.0172857, -0.0136823, 1.43635, 0.196521 )
+material/0 = ExtResource( 2 )
+
+[node name="marco" parent="." index="2"]
+transform = Transform( -0.00741398, 1.11759e-08, -0.999972, 0.0426639, 0.999089, -0.000316307, 0.999062, -0.0426651, -0.00740719, -0.078842, 0, 0.219643 )
+material_override = ExtResource( 6 )
+material/0 = ExtResource( 6 )
+
+[node name="cadena" parent="marco" index="0"]
+transform = Transform( 2.80738e-05, 1, 0.00015883, -0.999993, 2.74777e-05, 0.00375057, 0.00375056, -0.000158935, 0.999993, -0.0531786, 0.216434, -0.119517 )
+
+[node name="llantaAtras" parent="marco" index="1"]
+transform = Transform( 1, 1.78512e-09, -3.37443e-09, -3.81203e-09, 0.514324, -0.857596, 2.04636e-10, 0.857596, 0.514324, 3.0268e-09, 0.275001, -0.452159 )
+material_override = ExtResource( 7 )
+material/0 = ExtResource( 7 )
+
+[node name="plato" parent="marco" index="2"]
+transform = Transform( 0.999929, -0.0117783, 0.00177926, 0.00435811, 0.222719, -0.974873, 0.0110861, 0.974812, 0.222754, -0.000827466, 0.213, -0.111608 )
+material_override = ExtResource( 8 )
+
+[node name="pedalL" parent="marco/plato/bielaL" index="0"]
+transform = Transform( 0.0934962, 0.17346, 0.00934676, -0.173379, 0.0938385, -0.00716154, -0.010743, -0.00482047, 0.196923, 3.58408, 0.160959, 1.38326 )
+material_override = ExtResource( 9 )
+
+[node name="bielaR" parent="marco/plato" index="1"]
+material_override = ExtResource( 10 )
+
+[node name="pedalR" parent="marco/plato/bielaR" index="0"]
+transform = Transform( -0.0343974, -0.194137, -0.00671126, 0.193855, -0.0338702, -0.0138026, 0.0124308, -0.00900157, 0.196677, 3.48841, 0.101277, 1.33416 )
+material_override = ExtResource( 11 )
+
+[node name="sillin" parent="marco" index="3"]
+material_override = ExtResource( 12 )
+
+[node name="tenedor" parent="marco" index="4"]
+transform = Transform( 0.999175, 0.0346563, 0.0211583, -0.0354087, 0.998714, 0.0362892, -0.0198734, -0.0370084, 0.999117, -0.0272319, -0.00720611, 0.0200784 )
+material_override = ExtResource( 15 )
+
+[node name="llantaFront" parent="marco/tenedor" index="0"]
+transform = Transform( -0.00650275, 0.00356086, 0.999972, 0.480307, 0.8771, 7.45058e-08, -0.877076, 0.480294, -0.00741386, 0.00274313, 0.274, 0.36999 )
+material_override = ExtResource( 13 )
+material/0 = ExtResource( 13 )
+
+[node name="timon" parent="marco/tenedor" index="1"]
+material_override = ExtResource( 14 )
+
+[node name="AnimationPlayer" parent="." index="3"]
+autoplay = "montar"
+anims/crash = ExtResource( 20 )
+anims/left_hand = ExtResource( 18 )
+anims/look_sides = ExtResource( 17 )
+anims/montar = ExtResource( 16 )
+anims/ride1 = ExtResource( 4 )
+anims/right_hand = ExtResource( 19 )
+anims/stagger = ExtResource( 5 )
+anims/turn_left = ExtResource( 21 )
+anims/turn_right = ExtResource( 22 )
+blend_times = [ "montar", "crash", 1.0, "montar", "left_hand", 1.0, "montar", "look_sides", 1.0, "montar", "montar", 1.0, "montar", "ride1", 1.0, "montar", "right_hand", 1.0, "montar", "stagger", 1.0, "montar", "turn_left", 1.0, "montar", "turn_right", 1.0 ]
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 4 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 5 )

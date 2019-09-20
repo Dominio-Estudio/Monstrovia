@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/edificio1.obj-13416dc36ec792f487029111f3fba084.mesh"
+
+[deps]
+
+files=[ "res://.import/edificio1.obj-13416dc36ec792f487029111f3fba084.mesh" ]
+
+source_file="res://world/buildings/edificio1.obj"
+dest_files=[ "res://.import/edificio1.obj-13416dc36ec792f487029111f3fba084.mesh", "res://.import/edificio1.obj-13416dc36ec792f487029111f3fba084.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

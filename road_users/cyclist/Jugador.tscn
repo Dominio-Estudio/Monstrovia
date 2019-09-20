@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://road_users/cyclist/Monster.tscn" type="PackedScene" id=1]
+[ext_resource path="res://road_users/cyclist/Ciclista.gd" type="Script" id=2]
+[ext_resource path="res://road_users/cyclist/Ciclista.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=4]
+
+[sub_resource type="CylinderShape" id=1]
+radius = 0.256705
+height = 0.0800258
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.146995
+height = 0.781073
+
+[node name="Jugador" type="KinematicBody"]
+script = ExtResource( 2 )
+
+[node name="InputManager" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="CollisionBackWeel" type="CollisionShape" parent="."]
+transform = Transform( -4.37114e-08, 1, -1.62921e-07, 0, -1.62921e-07, -1, -1, -4.37114e-08, 7.12149e-15, 0.0113965, 0.269758, -0.51967 )
+shape = SubResource( 1 )
+
+[node name="CollisionFrontWheel" type="CollisionShape" parent="."]
+transform = Transform( -4.37114e-08, 1, -1.62921e-07, 0, -1.62921e-07, -1, -1, -4.37114e-08, 7.12149e-15, 0.0113965, 0.269758, 0.314994 )
+shape = SubResource( 1 )
+
+[node name="CollisionMiddle" type="CollisionShape" parent="."]
+transform = Transform( -4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0.0113965, 1.05656, -0.254262 )
+shape = SubResource( 2 )
+
+[node name="ModelRoot" type="Spatial" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.19328, 0, -0.141138 )
+
+[node name="Ciclista" parent="ModelRoot" instance=ExtResource( 3 )]
+
+[node name="Monster" parent="ModelRoot" instance=ExtResource( 1 )]
+visible = false
+[connection signal="swiped" from="InputManager" to="." method="_on_InputManager_swiped"]

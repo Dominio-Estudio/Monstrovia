@@ -1,0 +1,110 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://world/road/road.material" type="Material" id=1]
+[ext_resource path="res://world/road/anden.material" type="Material" id=2]
+[ext_resource path="res://world/Obstacle.gd" type="Script" id=3]
+[ext_resource path="res://world/trees/naturePack_155.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://world/buildings/edificio2/edificio2.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://world/buildings/edificio3/Edificio3.tscn" type="PackedScene" id=6]
+[ext_resource path="res://world/Woods2.tscn" type="PackedScene" id=7]
+[ext_resource path="res://world/buildings/hospital/Hospital.material" type="Material" id=8]
+[ext_resource path="res://world/buildings/hospital/01hospitalModel.obj" type="ArrayMesh" id=9]
+[ext_resource path="res://world/buildings/edificio2/edificio2.material" type="Material" id=10]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 2.93188, 2.15647, 0.480092 )
+
+[node name="WorldChunk" type="Spatial" groups=[
+"world_chunks",
+]]
+
+[node name="Carretera" type="MeshInstance" parent="."]
+transform = Transform( 10, 0, 0, 0, 0.997, 0, 0, 0, 30, 0, 0, 0 )
+material_override = ExtResource( 1 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="AndenDer" type="MeshInstance" parent="."]
+transform = Transform( 18, 0, 0, 0, 0.997, 0, 0, 0, 30, -28, -0.5, 0 )
+mesh = SubResource( 2 )
+material/0 = ExtResource( 2 )
+
+[node name="AndenIzq" type="MeshInstance" parent="."]
+transform = Transform( 10, 0, 0, 0, 0.997, 0, 0, 0, 30, 20, -0.5, 0 )
+mesh = SubResource( 2 )
+material/0 = ExtResource( 2 )
+
+[node name="Spatial2" type="Spatial" parent="."]
+transform = Transform( -1, 0, -8.74227e-08, 0, 0.999998, 0, 8.74227e-08, 0, -0.999998, 34, 0, -11.0001 )
+
+[node name="Area" type="Area" parent="." groups=[
+"obstacles",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 0 )
+script = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0842934, 1.18014, 0 )
+shape = SubResource( 3 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.62147, -0.953475, 0.735352 )
+mesh = ExtResource( 4 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+
+[node name="MeshInstance6" type="MeshInstance" parent="Area"]
+transform = Transform( 1.10111, 0, 1.31225, 0, 1.71303, 0, -1.31225, 0, 1.10111, 1.69237, -0.953475, 0 )
+mesh = ExtResource( 4 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 7.54979e-08, 0, -1, 0, 1, 0, 1, 0, 7.54979e-08, 23.1781, 0, -17.9205 )
+mesh = ExtResource( 5 )
+material/0 = ExtResource( 10 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 23, 0, 23 )
+mesh = ExtResource( 5 )
+material/0 = ExtResource( 10 )
+
+[node name="Woods" parent="." instance=ExtResource( 7 )]
+transform = Transform( 7.54979e-08, 0, 1, 0, 1, 0, -1, 0, 7.54979e-08, 19.4289, 0.5, -6.36321 )
+
+[node name="Woods2" parent="." instance=ExtResource( 7 )]
+transform = Transform( 7.54979e-08, 0, 1, 0, 1, 0, -1, 0, 7.54979e-08, 19.4289, 0.5, 13.6368 )
+
+[node name="Woods3" parent="." instance=ExtResource( 7 )]
+transform = Transform( -1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -13.5711, 0.5, 20.6368 )
+
+[node name="Woods4" parent="." instance=ExtResource( 7 )]
+transform = Transform( -1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -13.5711, 0.5, -2.36321 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="."]
+transform = Transform( -0.996195, 0, -0.0871558, 0, 1, 0, 0.0871558, 0, -0.996195, -28, 0, 18 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 8 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0, -18 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 8 )
+
+[node name="MeshInstance3" parent="." instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 24, 0, 3 )
+[connection signal="body_entered" from="Area" to="Area" method="_on_Area_body_entered"]

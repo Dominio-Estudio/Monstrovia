@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/background_music.ogg-50156679b812e0616f19566d02a672fa.oggstr"
+
+[deps]
+
+source_file="res://bicycle_level/music/background_music.ogg"
+dest_files=[ "res://.import/background_music.ogg-50156679b812e0616f19566d02a672fa.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

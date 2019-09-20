@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/car3.obj-3469017cab509fd0aaac6b14baed2a8d.mesh"
+
+[deps]
+
+files=[ "res://.import/car3.obj-3469017cab509fd0aaac6b14baed2a8d.mesh" ]
+
+source_file="res://autos/car3.obj"
+dest_files=[ "res://.import/car3.obj-3469017cab509fd0aaac6b14baed2a8d.mesh", "res://.import/car3.obj-3469017cab509fd0aaac6b14baed2a8d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

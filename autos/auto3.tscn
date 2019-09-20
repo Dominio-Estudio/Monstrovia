@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://autos/auto.gd" type="Script" id=1]
+[ext_resource path="res://autos/car3.obj" type="ArrayMesh" id=2]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1.56448, 1.29497, 3.79767 )
+
+[node name="Auto" type="Area" groups=[
+"vehicles",
+]]
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.31837, 0 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, -43.7983, 0, 10 )
+mesh = ExtResource( 2 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+
+[node name="RayCastFront" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 3 )
+enabled = true
+cast_to = Vector3( 0, 0, 5 )
+collide_with_areas = true
+
+[node name="RayCastBack" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -3 )
+cast_to = Vector3( 0, 0, -5 )
+[connection signal="body_entered" from="." to="." method="_on_Auto_body_entered"]

@@ -1,0 +1,54 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://road_users/cyclist/monster/start_up_left.anim" type="Animation" id=1]
+[ext_resource path="res://road_users/cyclist/monster/hand_left.anim" type="Animation" id=2]
+[ext_resource path="res://road_users/cyclist/monster/ride.anim" type="Animation" id=3]
+[ext_resource path="res://road_users/cyclist/monster/ride_up.anim" type="Animation" id=4]
+[ext_resource path="res://road_users/cyclist/monster/hand_right.anim" type="Animation" id=5]
+[ext_resource path="res://road_users/cyclist/monster.dae" type="PackedScene" id=6]
+[ext_resource path="res://road_users/cyclist/monster/stop_left.anim" type="Animation" id=7]
+[ext_resource path="res://road_users/cyclist/monster/start_up_right.anim" type="Animation" id=8]
+[ext_resource path="res://road_users/cyclist/monster/turn_left.anim" type="Animation" id=9]
+[ext_resource path="res://road_users/cyclist/monster/turn_right.anim" type="Animation" id=10]
+[ext_resource path="res://road_users/cyclist/monster/stop_right.anim" type="Animation" id=11]
+
+[node name="monster" instance=ExtResource( 6 )]
+
+[node name="monster" parent="Armature/Skeleton" index="0"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.250634, 0, -0.156625 )
+
+[node name="marco" parent="." index="1"]
+transform = Transform( -0.00741398, 9.31323e-09, -0.999972, 0.0426639, 0.999089, -0.000316309, 0.999062, -0.0426651, -0.00740719, -0.078842, 0, 0.219643 )
+
+[node name="cadena" parent="marco" index="0"]
+transform = Transform( 2.80738e-05, 1, 0.00015883, -0.999993, 2.74777e-05, 0.00375057, 0.00375056, -0.000158935, 0.999993, -0.0531296, 0.217045, -0.116434 )
+
+[node name="llantaAtras" parent="marco" index="1"]
+transform = Transform( 1, -4.02927e-10, -3.7962e-09, -3.81203e-09, -0.0520898, -0.998642, 2.04636e-10, 0.998642, -0.0520898, 3.0268e-09, 0.275001, -0.452159 )
+
+[node name="plato" parent="marco" index="2"]
+transform = Transform( 0.998809, 0.0078025, 0.0481704, -0.0305175, -0.670404, 0.741369, 0.0380781, -0.741955, -0.669367, -0.000799167, 0.21361, -0.111303 )
+
+[node name="pedalL" parent="marco/plato/bielaL" index="0"]
+transform = Transform( -0.0243454, 0.0350356, 0.192606, -0.127209, 0.144697, -0.0424001, -0.148803, -0.129432, 0.00473524, 3.64288, 0.110085, 1.44092 )
+
+[node name="pedalR" parent="marco/plato/bielaR" index="0"]
+transform = Transform( 0.0139984, 0.195364, -0.0235473, -0.17313, 0.00100734, -0.0945645, -0.0935281, 0.0273755, 0.171524, 3.40653, 0.110466, 1.25974 )
+
+[node name="tenedor" parent="marco" index="4"]
+transform = Transform( 0.999217, 0.0346842, 0.0190206, -0.0353711, 0.998687, 0.0370542, -0.0177104, -0.037698, 0.999132, -0.0259416, -0.00718434, 0.0188216 )
+
+[node name="llantaFront" parent="marco/tenedor" index="0"]
+transform = Transform( -0.004475, -0.00591087, 0.999973, -0.797281, 0.603608, 2.98023e-08, -0.603591, -0.79726, -0.00741374, 0.00274312, 0.274, 0.36999 )
+
+[node name="AnimationPlayer" parent="." index="2"]
+anims/hand_left = ExtResource( 2 )
+anims/hand_right = ExtResource( 5 )
+anims/ride = ExtResource( 3 )
+anims/ride_up = ExtResource( 4 )
+anims/start_up_left = ExtResource( 1 )
+anims/start_up_right = ExtResource( 8 )
+anims/stop_left = ExtResource( 7 )
+anims/stop_right = ExtResource( 11 )
+anims/turn_left = ExtResource( 9 )
+anims/turn_right = ExtResource( 10 )

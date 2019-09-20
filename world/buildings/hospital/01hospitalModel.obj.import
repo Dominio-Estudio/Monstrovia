@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/01hospitalModel.obj-239e921c4fd2f7eae4f714d41bdf1adf.mesh"
+
+[deps]
+
+files=[ "res://.import/01hospitalModel.obj-239e921c4fd2f7eae4f714d41bdf1adf.mesh" ]
+
+source_file="res://world/buildings/hospital/01hospitalModel.obj"
+dest_files=[ "res://.import/01hospitalModel.obj-239e921c4fd2f7eae4f714d41bdf1adf.mesh", "res://.import/01hospitalModel.obj-239e921c4fd2f7eae4f714d41bdf1adf.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

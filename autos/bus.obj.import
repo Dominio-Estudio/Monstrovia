@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/bus.obj-d223213eb303c7f062da5d9fcd40056f.mesh"
+
+[deps]
+
+files=[ "res://.import/bus.obj-d223213eb303c7f062da5d9fcd40056f.mesh" ]
+
+source_file="res://autos/bus.obj"
+dest_files=[ "res://.import/bus.obj-d223213eb303c7f062da5d9fcd40056f.mesh", "res://.import/bus.obj-d223213eb303c7f062da5d9fcd40056f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

@@ -1,0 +1,301 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://ui/ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/Recurso 38.png" type="Texture" id=2]
+[ext_resource path="res://ui/HUD/reloj.png" type="Texture" id=3]
+[ext_resource path="res://ui/Comfortaa-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Stories/Objetos/Recurso 31.png" type="Texture" id=5]
+[ext_resource path="res://ui/abrir baul.ogg" type="AudioStream" id=6]
+[ext_resource path="res://ui/HUD/Salud.tscn" type="PackedScene" id=7]
+[ext_resource path="res://ui/HUD/Recurso 37_1.png" type="Texture" id=8]
+[ext_resource path="res://ui/Barra accendente.ogg" type="AudioStream" id=9]
+[ext_resource path="res://ui/ButtonExpand.tscn" type="PackedScene" id=10]
+
+
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Control
+
+onready var tween = $Tween
+var timer
+var animar = false
+var t_etiqueta = 0
+var salud_etiqueta = 0
+signal pop_up_cerrado
+
+func _ready():
+	timer = Timer.new()
+	if globals.parametros_game_over.a_tiempo:
+		$Fondo/Label.text = \"¡Felicitaciones! Llegaste a tiempo\"
+	else:
+		$Fondo/Label.text = \"Se acabó el tiempo. ¡Llegas tarde!\"
+	aparecer()
+
+func aparecer():
+	tween.interpolate_property(self, \"rect_scale\", Vector2(0,0), Vector2(1,1), 0.25, Tween.TRANS_SINE, Tween.EASE_IN_OUT,1)
+	tween.start()
+	timer.wait_time = 1.25
+	timer.start()
+	timer.connect(\"timeout\",self,\"animar_datos\")
+	add_child(timer)
+
+func desaparecer():
+	tween.interpolate_property(self, \"rect_scale\", Vector2(1,1), Vector2(0,0), 0.25, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	tween.start()
+	emit_signal(\"pop_up_cerrado\")
+
+func _process(delta):
+	if animar:
+		if t_etiqueta < globals.parametros_game_over.tiempo_restante :
+			t_etiqueta += 10
+			$Fondo/Reloj/Label.text = globals.tiempo_en_reloj(t_etiqueta)
+		if salud_etiqueta < globals.parametros_game_over.salud:
+			salud_etiqueta += 1
+			$Fondo/Salud.value = salud_etiqueta
+			
+func animar_datos():
+	animar = true
+
+func _on_Baul_pressed():
+	$Fondo/Baul.texture_normal = preload(\"res://Stories/Objetos/baul abierto.png\")
+	$Fondo/Baul/AudioStreamPlayer.play()
+	$AnimationPlayer.stop()
+"
+
+[sub_resource type="DynamicFont" id=2]
+
+size = 36
+use_mipmaps = false
+use_filter = true
+font_data = ExtResource( 4 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="Animation" id=3]
+
+resource_name = "baul"
+length = 1.0
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Fondo/Baul:rect_scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.95 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
+
+[node name="Estadisticas" type="Control" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 648.704, 389.973 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 1 )
+script = SubResource( 1 )
+_sections_unfolded = [ "Rect", "Theme" ]
+
+[node name="Panel" type="Panel" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -2.0
+margin_bottom = -2.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Fondo" type="TextureRect" parent="." index="1"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -579.5
+margin_top = -265.0
+margin_right = 578.5
+margin_bottom = 265.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 2 )
+stretch_mode = 0
+_sections_unfolded = [ "Rect" ]
+
+[node name="Reloj" type="TextureRect" parent="Fondo" index="0"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 400.0
+margin_top = 131.0
+margin_right = 683.0
+margin_bottom = 265.0
+rect_scale = Vector2( -1, 1 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 3 )
+stretch_mode = 0
+_sections_unfolded = [ "Anchor", "Margin", "Rect" ]
+
+[node name="Label" type="Label" parent="Fondo/Reloj" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 145.0
+margin_top = 47.0
+margin_right = 271.0
+margin_bottom = 104.0
+rect_scale = Vector2( -1, 1 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "00:00"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_fonts", "custom_styles" ]
+
+[node name="Baul" type="TextureButton" parent="Fondo" index="1"]
+
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -369.0
+margin_top = -112.0
+margin_right = -134.0
+margin_bottom = 123.0
+rect_scale = Vector2( 1.07656, 1.07656 )
+rect_pivot_offset = Vector2( 114.818, 127.827 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 5 )
+expand = true
+_sections_unfolded = [ "Rect", "Textures" ]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Fondo/Baul" index="0"]
+
+stream = ExtResource( 6 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="Salud" parent="Fondo" index="2" instance=ExtResource( 7 )]
+
+margin_left = 149.0
+margin_top = 306.0
+margin_right = 645.0
+margin_bottom = 346.0
+rect_min_size = Vector2( 0, 40 )
+value = 0.0
+texture_under = ExtResource( 8 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Fondo/Salud" index="1"]
+
+stream = ExtResource( 9 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+_sections_unfolded = [ "Pause" ]
+
+[node name="Label" type="Label" parent="Fondo" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 214.0
+margin_top = 58.0
+margin_right = 933.0
+margin_bottom = 104.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "¡Se acabó el tiempo. Llegas tarde!"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+
+[node name="Tween" type="Tween" parent="." index="2"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+_sections_unfolded = [ "playback" ]
+
+[node name="Button" parent="." index="3" instance=ExtResource( 10 )]
+
+margin_left = 598.0
+margin_top = 524.0
+margin_right = 741.0
+margin_bottom = 591.0
+text = "OK"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+
+root_node = NodePath("..")
+autoplay = "baul"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/baul = SubResource( 3 )
+blend_times = [  ]
+
+[connection signal="pressed" from="Fondo/Baul" to="." method="_on_Baul_pressed"]
+
+[connection signal="pressed" from="Button" to="." method="desaparecer"]
+
+
