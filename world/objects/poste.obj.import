@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/poste.obj-61a002f18d7a03b59033d38c53933f60.mesh"
+
+[deps]
+
+files=[ "res://.import/poste.obj-61a002f18d7a03b59033d38c53933f60.mesh" ]
+
+source_file="res://world/objects/poste.obj"
+dest_files=[ "res://.import/poste.obj-61a002f18d7a03b59033d38c53933f60.mesh", "res://.import/poste.obj-61a002f18d7a03b59033d38c53933f60.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

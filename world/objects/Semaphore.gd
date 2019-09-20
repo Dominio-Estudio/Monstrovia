@@ -1,9 +1,9 @@
 extends Spatial
 
 enum STATES {RED, YELLOW, GREEN}
-const RED_TIME = 10
+var RED_TIME = 4
 const YELLOW_TIME = 0.5
-const GREEN_TIME = 1.5
+const GREEN_TIME = 2
 
 var t = 0
 var state = STATES.RED
@@ -11,7 +11,7 @@ var prev_state = STATES.RED
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	RED_TIME += randi()%3
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

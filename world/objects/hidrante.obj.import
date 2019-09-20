@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/hidrante.obj-ced73f54f006c059928d473f6daf51da.mesh"
+
+[deps]
+
+files=[ "res://.import/hidrante.obj-ced73f54f006c059928d473f6daf51da.mesh" ]
+
+source_file="res://world/objects/hidrante.obj"
+dest_files=[ "res://.import/hidrante.obj-ced73f54f006c059928d473f6daf51da.mesh", "res://.import/hidrante.obj-ced73f54f006c059928d473f6daf51da.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://world/road/road.material" type="Material" id=1]
 [ext_resource path="res://world/road/anden.material" type="Material" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://world/buildings/edificio2/edificio2.obj" type="ArrayMesh" id=6]
 [ext_resource path="res://world/buildings/edificio2/edificio2.material" type="Material" id=7]
 [ext_resource path="res://world/buildings/hospital/Hospital.material" type="Material" id=8]
+[ext_resource path="res://world/objects/Postes.tscn" type="PackedScene" id=9]
 
 [sub_resource type="PlaneMesh" id=1]
 
@@ -62,3 +63,5 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -22.686
 
 [node name="MeshInstance3" parent="." instance=ExtResource( 4 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -34.6865, 0, 23.3871 )
+
+[node name="Postes" parent="." instance=ExtResource( 9 )]

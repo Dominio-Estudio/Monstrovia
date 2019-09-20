@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://world/road/road.material" type="Material" id=1]
 [ext_resource path="res://world/road/anden.material" type="Material" id=2]
 [ext_resource path="res://world/Woods.tscn" type="PackedScene" id=3]
+[ext_resource path="res://world/objects/Postes.tscn" type="PackedScene" id=4]
 
 [sub_resource type="PlaneMesh" id=1]
 
@@ -42,3 +43,5 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -29.805
 
 [node name="Woods4" parent="." instance=ExtResource( 3 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -29.8056, 0.499756, 14.2436 )
+
+[node name="Postes" parent="." instance=ExtResource( 4 )]
