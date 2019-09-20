@@ -14,6 +14,7 @@ var WorldChunks = [
 	preload("res://world/WorldChunkObstacle3.tscn"),
 	preload("res://world/WorldChunkSemaphore.tscn"),
 ]
+var university = preload("res://world/UniversityChunk.tscn")
 var world_chunks = []
 var last_chunk = 0
 var last_chunk_count = 0
@@ -30,16 +31,21 @@ export var vehicle_spawn_interval = 1.5 #s
 var vehicles = []
 
 # TODO this times can vary depending on the level
-var emul_time = 1800
-var real_time = 180
+var emul_time: int = 1800
+var real_time = 120
 var time_scale = emul_time / real_time
+
+var distance_to_goal = 20 * real_time
+var traveled_distance = 0
+var close_to_goal = false
+var game_over = false
 
 export var traffic_density = 5 # How many vehicles are there in the world
 
 func _ready():
 	randomize()
 	globals.tutorial = true
-	for i in range(15):
+	for i in range(7):
 		var new_chunk = WorldChunks[randi()%3].instance()
 		new_chunk.translation = Vector3(0,0,i*world_chunk_size)
 		world_chunks.push_front(new_chunk)
@@ -50,16 +56,22 @@ func _process(delta):
 		return
 	var all_vehicles: Array = get_tree().get_nodes_in_group("vehicles")
 	if all_vehicles.size() < traffic_density:
-		if vehicle_spawn_time - last_vehicle_spawn_time >= vehicle_spawn_interval:
+		if vehicle_spawn_time - last_vehicle_spawn_time >= vehicle_spawn_interval  && traveled_distance < distance_to_goal - world_chunk_size*world_chunks.size():
 			last_vehicle_spawn_time = vehicle_spawn_time
 			generate_vehicle()
 		else:
 			vehicle_spawn_time += delta
+	if traveled_distance >= distance_to_goal - world_chunk_size*0.2:
+		if !game_over:
+			game_over = true
+			end_level()
 	update_ui()
 
 func _physics_process(delta):
 	update_time(delta)
 	update_ui()
+	traveled_distance += $Jugador.speed*delta
+	$Label.text = str(traveled_distance," - ",distance_to_goal)
 	
 	var offset = 10
 	for chunk in world_chunks:
@@ -71,11 +83,19 @@ func _physics_process(delta):
 		if  distance_to_player.z < 0 and distance_to_player.length() > world_chunk_size + offset:
 			var old_chunk = world_chunks.pop_back()
 			#TODO: Add pool generation
-#			world_chunks_pool.push_front(old_chunk)
 			old_chunk.queue_free()
 			remove_child(old_chunk)
-			var new_chunk = generate_world_chunk(Vector3(0,0,world_chunk_size + world_chunks[0].global_transform.origin.z))
-			add_child(new_chunk)
+			# Create a new chunk
+			if traveled_distance < distance_to_goal - world_chunk_size*world_chunks.size():
+				var new_chunk = generate_world_chunk(Vector3(0,0,world_chunk_size + world_chunks[0].global_transform.origin.z))
+				add_child(new_chunk)
+			elif(!close_to_goal):
+				close_to_goal = true
+				var new_chunk = preload("res://world/UniversityChunk.tscn").instance()
+				var pos = Vector3(0,0,world_chunk_size + world_chunks[0].global_transform.origin.z)
+				new_chunk.translation = pos
+				world_chunks.push_front(new_chunk)
+				add_child(new_chunk)
 	for vehicle in vehicles:
 		vehicle.global_translate(Vector3(0,0,-$Jugador.speed*delta))
 #		var distance_to_player = vehicle.global_transform.origin.distance_to($Jugador.global_transform.origin)
@@ -86,7 +106,12 @@ func _physics_process(delta):
 			vehicle.queue_free()
 
 func update_time(delta):
-	emul_time -= floor(delta * time_scale)
+	real_time -= delta
+	emul_time = floor(real_time * time_scale)
+	var s = emul_time%60
+	if s < 10:
+		s = str("0",s)
+	$UI/HUD/TextureRect/Label.text = str(emul_time/60,':',s)
 #	$UI/Time/Label.text = str(emul_time)
 #TODO: Add pool generation
 func generate_world_chunk(pos: Vector3):
@@ -163,8 +188,20 @@ func _on_InputManager_swiped(gesture):
 		update_ui()
 
 func update_ui():
-	$UI/HUD/Speed/Label.text = str($Jugador.speed," KM")
+	$UI/HUD/Speed/Label.text = str(floor($Jugador.speed)," KM")
+	var remaining_distance = distance_to_goal - traveled_distance
+	var i = floor(remaining_distance/1000)
+	var d = floor((remaining_distance - i*1000)/100)
+	$UI/HUD/TextureRect/DistanceLabel.text = str(i,',',d, ' Km')
+	
 	
 func monstrify():
 	$Camera.environment.fog_color = Color.red
 	$MonstrificationSound.play()
+
+func end_level():
+	$Jugador.speed = 0
+	$AudioStreamPlayer.stop()
+	var end_scene = preload("res://bicycle_level/end_scene/EndScene.tscn").instance()
+	add_child(end_scene)
+	end_scene.get_node("AnimationPlayer").play("default")

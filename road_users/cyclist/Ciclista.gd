@@ -12,6 +12,10 @@ const SPEED_STEP = 5
 var health = 100
 var speed = 0
 
+var acelerar = false
+var frenar = false
+var anim_finished = false
+
 export(NodePath) var health_indicator_path
 
 onready var animation_player = $ModelRoot/Ciclista/AnimationPlayer
@@ -28,14 +32,22 @@ func _physics_process(delta):
 	else:
 		if Input.is_action_pressed("ui_left"):
 			turn(-1,delta)
+			anim_finished = false
 		elif Input.is_action_pressed("ui_right"):
 			turn(1,delta)
+			anim_finished = false
 		if Input.is_action_pressed("signal_turn_left"):
 			animation_player.play("left_hand")
+			anim_finished = false
 		elif Input.is_action_pressed("signal_turn_right"):
 			animation_player.play("right_hand")
+			anim_finished = false
 		else:
 			rotation_degrees = Vector3.ZERO
+	if frenar:
+		modify_speed(-SPEED_STEP*delta*4)
+	if acelerar:
+		modify_speed(SPEED_STEP*delta)
 	
 func turn(amount, delta):
 	rotation_degrees = Vector3(0,-amount*rotation_scale,amount*rotation_scale)
@@ -54,7 +66,7 @@ func modify_speed(step):
 		pedal()
 	
 func pedal():
-	if(animation_player.current_animation != "ride1"):
+	if(animation_player.current_animation != "ride1" && anim_finished):
 		$ModelRoot/Ciclista/AnimationPlayer.play("ride1")
 
 func stop():
@@ -80,15 +92,33 @@ func monstrify():
 
 func _on_TurnLeft_button_down():
 	animation_player.play("left_hand")
+	anim_finished = false
 
 func _on_TurnRight_button_down():
 	animation_player.play("right_hand")
-
+	anim_finished = false
+	
 
 func _on_InputManager_swiped(gesture):
 	if globals.is_mobile:
 		var dir = gesture.get_direction()
 		if dir == 'up':
 			modify_speed(SPEED_STEP)
+			globals.tutorial = false
 		if dir == 'down':
 			modify_speed(-SPEED_STEP)
+
+func _on_Pedal_button_down():
+	globals.tutorial = false
+	acelerar = true
+func _on_Pedal_button_up():
+	acelerar = false
+
+func _on_Freno_button_down():
+	frenar = true
+func _on_Freno_button_up():
+	frenar = false
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	anim_finished = true

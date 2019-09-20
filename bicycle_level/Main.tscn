@@ -1,13 +1,15 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://bicycle_level/Main.gd" type="Script" id=1]
 [ext_resource path="res://env/fog_env.tres" type="Environment" id=2]
 [ext_resource path="res://bicycle_level/Camera.gd" type="Script" id=3]
 [ext_resource path="res://world/WorldChunkCicloRuta.tscn" type="PackedScene" id=4]
-[ext_resource path="res://road_users/cyclist/Jugador.tscn" type="PackedScene" id=5]
+[ext_resource path="res://world/UniversityChunk.tscn" type="PackedScene" id=5]
 [ext_resource path="res://road_users/common/sounds/Mounstruo.ogg" type="AudioStream" id=6]
 [ext_resource path="res://bicycle_level/music/background_music.ogg" type="AudioStream" id=7]
-[ext_resource path="res://ui/HUD/HUD.tscn" type="PackedScene" id=8]
+[ext_resource path="res://ui/h1.tres" type="Theme" id=8]
+[ext_resource path="res://road_users/cyclist/Jugador.tscn" type="PackedScene" id=9]
+[ext_resource path="res://ui/HUD/HUD.tscn" type="PackedScene" id=10]
 
 [node name="Main" type="Spatial" groups=[
 "environment",
@@ -19,6 +21,7 @@ traffic_density = 30
 transform = Transform( -1, -3.55271e-14, -3.25841e-07, -1.18913e-07, 0.93103, 0.364942, 3.03368e-07, 0.364942, -0.93103, -6.99951, 6.81934, -8.1889 )
 environment = ExtResource( 2 )
 current = true
+far = 200.0
 script = ExtResource( 3 )
 target = NodePath("../Jugador")
 
@@ -29,12 +32,15 @@ transform = Transform( 0.975335, 0.190251, -0.111923, 0, 0.507057, 0.861913, 0.2
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148926, -0.0292969, -0.0314331 )
 visible = false
 
+[node name="WorldChunk2" parent="." instance=ExtResource( 5 )]
+visible = false
+
 [node name="DebugCamera" type="Camera" parent="."]
 transform = Transform( -0.422618, -0.896472, 0.133163, 0, 0.146929, 0.989147, -0.906308, 0.418032, -0.0620948, 6.46083, 226.115, -34.0127 )
 far = 200.0
 
-[node name="Jugador" parent="." instance=ExtResource( 5 )]
-transform = Transform( 2.38439, 0, 0, 0, 2.38439, 0, 0, 0, 2.38439, -7, 0, 0 )
+[node name="Jugador" parent="." instance=ExtResource( 9 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -7, 0, 0 )
 health_indicator_path = NodePath("../UI/HUD/Salud")
 
 [node name="SpawnPointsFront" type="Spatial" parent="."]
@@ -55,7 +61,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.16109, 0, 0 )
 [node name="Linea2" type="Position3D" parent="SpawnPointsFront"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11656, 0, 0 )
 
-[node name="UI" parent="." instance=ExtResource( 8 )]
+[node name="UI" parent="." instance=ExtResource( 10 )]
 
 [node name="MonstrificationSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
@@ -66,5 +72,29 @@ stream = ExtResource( 7 )
 autoplay = true
 mix_target = 1
 bus = "BackgroundMusic"
+
+[node name="Label" type="Label" parent="."]
+visible = false
+margin_left = 461.167
+margin_top = 287.039
+margin_right = 501.167
+margin_bottom = 301.039
+theme = ExtResource( 8 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="UI/HUD/HandLeftTouch" to="Jugador" method="_on_TurnLeft_button_down"]
+[connection signal="button_down" from="UI/HUD/HandLeft" to="Jugador" method="_on_TurnLeft_button_down"]
+[connection signal="button_down" from="UI/HUD/Freno" to="Jugador" method="_on_Freno_button_down"]
+[connection signal="button_up" from="UI/HUD/Freno" to="Jugador" method="_on_Freno_button_up"]
+[connection signal="pressed" from="UI/HUD/PedalTouch" to="Jugador" method="_on_Pedal_button_down"]
+[connection signal="released" from="UI/HUD/PedalTouch" to="Jugador" method="_on_Pedal_button_up"]
+[connection signal="pressed" from="UI/HUD/FrenoTouch" to="Jugador" method="_on_Freno_button_down"]
+[connection signal="released" from="UI/HUD/FrenoTouch" to="Jugador" method="_on_Freno_button_up"]
+[connection signal="button_down" from="UI/HUD/Pedal" to="Jugador" method="_on_Pedal_button_down"]
+[connection signal="button_up" from="UI/HUD/Pedal" to="Jugador" method="_on_Pedal_button_up"]
+[connection signal="pressed" from="UI/HUD/HandRightTouch" to="Jugador" method="_on_TurnRight_button_down"]
+[connection signal="button_down" from="UI/HUD/HandRight" to="Jugador" method="_on_TurnRight_button_down"]
 
 [editable path="UI"]

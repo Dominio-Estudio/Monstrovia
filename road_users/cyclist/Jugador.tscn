@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://road_users/cyclist/Monster.tscn" type="PackedScene" id=1]
 [ext_resource path="res://road_users/cyclist/Ciclista.gd" type="Script" id=2]
@@ -12,6 +12,8 @@ height = 0.0800258
 [sub_resource type="CapsuleShape" id=2]
 radius = 0.146995
 height = 0.781073
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=3]
 
 [node name="Jugador" type="KinematicBody"]
 script = ExtResource( 2 )
@@ -36,6 +38,39 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.1932
 
 [node name="Ciclista" parent="ModelRoot" instance=ExtResource( 3 )]
 
+[node name="casco" parent="ModelRoot/Ciclista" index="1"]
+transform = Transform( 0.0148331, -0.0365714, -0.171662, 0.00267438, 0.172301, -0.0364765, 0.175494, 0.000465364, 0.0150651, 0.0216029, 1.45199, 0.211728 )
+
+[node name="marco" parent="ModelRoot/Ciclista" index="2"]
+transform = Transform( -0.0074141, 1.49012e-08, -0.999973, 0.0233799, 0.999727, -0.00017333, 0.999699, -0.0233805, -0.00741208, -0.078842, 0, 0.219643 )
+
+[node name="cadena" parent="ModelRoot/Ciclista/marco" index="0"]
+transform = Transform( 2.80142e-05, 1, 0.000158831, -0.999993, 2.74181e-05, 0.00375057, 0.00375056, -0.000158934, 0.999993, -0.0531296, 0.217045, -0.116434 )
+
+[node name="llantaAtras" parent="ModelRoot/Ciclista/marco" index="1"]
+transform = Transform( 1, -2.43018e-10, -1.48156e-10, -1.05839e-10, -0.800723, 0.599034, -2.64208e-10, -0.599034, -0.800723, 6.28643e-09, 0.275001, -0.452159 )
+
+[node name="plato" parent="ModelRoot/Ciclista/marco" index="2"]
+transform = Transform( 0.997865, 0.0604827, -0.0246443, -0.0342067, 0.162555, -0.986106, -0.0556363, 0.984844, 0.164277, -0.000827464, 0.213, -0.111608 )
+
+[node name="pedalL" parent="ModelRoot/Ciclista/marco/plato/bielaL" index="0"]
+transform = Transform( 0.0773091, 0.180759, -0.0163313, -0.181421, 0.077473, -0.00131794, 0.00520596, 0.0155353, 0.196593, 3.59801, 0.109319, 1.38105 )
+
+[node name="pedalR" parent="ModelRoot/Ciclista/marco/plato/bielaR" index="0"]
+transform = Transform( 0.0385799, 0.193364, -0.00625524, -0.19342, 0.0384124, -0.00552227, -0.00419482, 0.00721297, 0.197098, 3.46626, 0.186523, 1.26171 )
+
+[node name="tenedor" parent="ModelRoot/Ciclista/marco" index="4"]
+transform = Transform( 0.996678, 0.0436988, 0.0687208, -0.04563, 0.998599, 0.0267873, -0.0674539, -0.029834, 0.997276, -0.043636, -0.00410666, 0.0180742 )
+
+[node name="llantaFront" parent="ModelRoot/Ciclista/marco/tenedor" index="0"]
+transform = Transform( -1.00136e-05, -0.00741384, 0.999972, -0.999999, 0.0013665, 2.98023e-08, -0.00136644, -0.999972, -0.00741386, 0.0027431, 0.274, 0.36999 )
+
+[node name="AnimationTree" parent="ModelRoot/Ciclista" index="4"]
+parameters/playback = SubResource( 3 )
+
 [node name="Monster" parent="ModelRoot" instance=ExtResource( 1 )]
 visible = false
 [connection signal="swiped" from="InputManager" to="." method="_on_InputManager_swiped"]
+[connection signal="animation_finished" from="ModelRoot/Ciclista/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+
+[editable path="ModelRoot/Ciclista"]
