@@ -108,10 +108,12 @@ func _physics_process(delta):
 func update_time(delta):
 	real_time -= delta
 	emul_time = floor(real_time * time_scale)
+	emul_time = max(emul_time,0)
 	var s = emul_time%60
 	if s < 10:
-		s = str("0",s)
-	$UI/HUD/TextureRect/Label.text = str(emul_time/60,':',s)
+		$UI/HUD/TextureRect/Label.text = str(emul_time/60,':0',s)
+	else:
+		$UI/HUD/TextureRect/Label.text = str(emul_time/60,':',s)
 #	$UI/Time/Label.text = str(emul_time)
 #TODO: Add pool generation
 func generate_world_chunk(pos: Vector3):
