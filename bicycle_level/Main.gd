@@ -22,7 +22,7 @@ var last_chunk_count = 0
 var world_chunks_pool = [] #TODO: Add pool generation
 const world_chunk_size = 60
 
-const SPEED_STEP = 5
+const SPEED_STEP = 0.5
 export(float,0.0,1.0) var P_appear_behind_player = 0.4
 
 var vehicle_spawn_time = 0
@@ -39,6 +39,8 @@ var distance_to_goal = 20 * real_time
 var traveled_distance = 0
 var close_to_goal = false
 var game_over = false
+
+export(Color) var normal_fog
 
 export var traffic_density = 5 # How many vehicles are there in the world
 
@@ -175,9 +177,13 @@ func decrease_speed():
 	update_ui()
 
 func _unhandled_input(event):
-	if event.is_action_pressed("ui_up"):
+#	if event.is_action_pressed("ui_up"):		
+#		increase_speed()
+#	if event.is_action_pressed("ui_down"):
+#		decrease_speed()
+	if(Input.is_action_pressed("ui_up")):
 		increase_speed()
-	if event.is_action_pressed("ui_down"):
+	if(Input.is_action_pressed("ui_down")):
 		decrease_speed()
 
 func _on_InputManager_swiped(gesture):
@@ -191,6 +197,10 @@ func _on_InputManager_swiped(gesture):
 
 func update_ui():
 	$UI/HUD/Speed/Label.text = str(floor($Jugador.speed)," KM")
+	if($Jugador.speed > 20):
+		$UI/HUD/Speed/Label.add_color_override("font_color", Color.red)
+		if(!$UI/HUD/Speed/Label/AnimationPlayer.is_playing()): $UI/HUD/Speed/Label/AnimationPlayer.play("SpeedWarning")
+	else: $UI/HUD/Speed/Label.add_color_override("font_color", Color.white)
 	var remaining_distance = distance_to_goal - traveled_distance
 	var i = floor(remaining_distance/1000)
 	var d = floor((remaining_distance - i*1000)/100)
@@ -200,6 +210,10 @@ func update_ui():
 func monstrify():
 	$Camera.environment.fog_color = Color.red
 	$MonstrificationSound.play()
+
+func normalize():
+	$Camera.environment.fog_color = normal_fog
+	$MonstrificationSound.stop()
 
 func end_level():
 	$Jugador.speed = 0
