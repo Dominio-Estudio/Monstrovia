@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://bicycle_level/Main.gd" type="Script" id=1]
 [ext_resource path="res://env/fog_env.tres" type="Environment" id=2]
@@ -10,6 +10,15 @@
 [ext_resource path="res://road_users/common/sounds/Mounstruo.ogg" type="AudioStream" id=8]
 [ext_resource path="res://bicycle_level/music/background_music.ogg" type="AudioStream" id=9]
 [ext_resource path="res://ui/h1.tres" type="Theme" id=10]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 2.25067, 1, 6.8978 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 2.38486, 1, 6.81778 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 2.37187, 1, 6.65775 )
 
 [node name="Main" type="Spatial" groups=[
 "environment",
@@ -37,10 +46,6 @@ visible = false
 [node name="WorldChunk2" parent="." instance=ExtResource( 5 )]
 visible = false
 
-[node name="DebugCamera" type="Camera" parent="."]
-transform = Transform( -0.422618, -0.896472, 0.133163, 0, 0.146929, 0.989147, -0.906308, 0.418032, -0.0620948, 6.46083, 226.115, -34.0127 )
-far = 200.0
-
 [node name="Jugador" parent="." instance=ExtResource( 6 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -7, 0, 0 )
 monsterPenalty = 20
@@ -53,25 +58,59 @@ endLeft = 3.5
 validHandSignal = 4.0
 
 [node name="SpawnPointsFront" type="Spatial" parent="."]
-editor/display_folded = true
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 130 )
 
 [node name="Linea1" type="Position3D" parent="SpawnPointsFront"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80995, 0, 0 )
 
-[node name="Slot1" type="Position3D" parent="SpawnPointsFront"]
+[node name="Slot1" type="Area" parent="SpawnPointsFront"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.80995, 0, 0 )
 
-[node name="Slot2" type="Position3D" parent="SpawnPointsFront"]
+[node name="CollisionShape" type="CollisionShape" parent="SpawnPointsFront/Slot1"]
+shape = SubResource( 1 )
+
+[node name="Slot2" type="Area" parent="SpawnPointsFront"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0393505, 0, 0 )
 
-[node name="Slot3" type="Position3D" parent="SpawnPointsFront"]
+[node name="CollisionShape" type="CollisionShape" parent="SpawnPointsFront/Slot2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.308836, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="Slot3" type="Area" parent="SpawnPointsFront"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.16109, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SpawnPointsFront/Slot3"]
+shape = SubResource( 3 )
 
 [node name="Linea2" type="Position3D" parent="SpawnPointsFront"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11656, 0, 0 )
 
 [node name="UI" parent="." instance=ExtResource( 7 )]
+
+[node name="HUD" parent="UI" index="0"]
+editor/display_folded = true
+
+[node name="Recurso 38" parent="UI/HUD/Pausa/PanelContainer" index="0"]
+margin_right = 1024.0
+margin_top = 313.0
+margin_left = 579.0
+
+[node name="ViewportContainer" type="ViewportContainer" parent="UI"]
+margin_right = 1022.0
+margin_bottom = 601.0
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="UI/ViewportContainer"]
+size = Vector2( 443, 288 )
+handle_input_locally = false
+render_target_update_mode = 3
+gui_snap_controls_to_pixels = false
+
+[node name="DebugCamera" type="Camera" parent="UI/ViewportContainer/Viewport"]
+current = true
+transform = Transform( -0.422618, -0.896472, 0.133163, 0, 0.146929, 0.989147, -0.906308, 0.418031, -0.0620948, 0.236076, 64.659, 122.983 )
+fov = 28.1
+far = 200.0
 
 [node name="MonstrificationSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
