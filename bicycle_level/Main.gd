@@ -44,6 +44,8 @@ export(Color) var normal_fog
 
 export var traffic_density = 5 # How many vehicles are there in the world
 
+signal game_over_by_time
+
 func _ready():
 	randomize()
 	globals.tutorial = true
@@ -116,6 +118,8 @@ func update_time(delta):
 		$UI/HUD/TextureRect/Label.text = str(emul_time/60,':0',s)
 	else:
 		$UI/HUD/TextureRect/Label.text = str(emul_time/60,':',s)
+	if(emul_time <= 0):
+		emit_signal("game_over_by_time")
 #	$UI/Time/Label.text = str(emul_time)
 #TODO: Add pool generation
 func generate_world_chunk(pos: Vector3):
