@@ -23,6 +23,8 @@ func _physics_process(delta):
 			speed = object.speed
 		if object.is_in_group("obstacles") or (object.is_in_group("semaphore") && object.state != 2) or object.is_in_group("ciclorutas"):
 				speed = 0
+		elif object.is_in_group("semaphore"):
+			random_speed(MODES.SLOW)
 
 func random_speed(mode):
 	match mode:
