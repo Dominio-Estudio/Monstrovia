@@ -18,6 +18,7 @@ func _ready():
 	add_child(audio_player)
 	
 func _on_Button_button_down():
+	get_tree().paused = false
 	audio_player.play()
 	match action :
 		ACTION.ZOOM:
