@@ -3,7 +3,7 @@ extends Spatial
 enum STATES {RED, YELLOW, GREEN}
 var RED_TIME = 4
 const YELLOW_TIME = 0.5
-const GREEN_TIME = 2
+const GREEN_TIME = 5
 
 var t = 0
 var state = STATES.RED
