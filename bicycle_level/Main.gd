@@ -149,22 +149,28 @@ func generate_vehicle():
 		spawn_points = $SpawnPointsFront
 
 	var player_slot = get_player_slot(spawn_points)
-	if randf() < P_appear_behind_player:
-		auto.translation = player_slot
+	# If there isn't another car at the spawn point, add the car to the scene.
+	var slot_is_colliding = (player_slot as Area).get_overlapping_areas().size()
+	if slot_is_colliding <= 0:
+		if randf() < P_appear_behind_player:
+			auto.translation = player_slot.global_transform.origin
+		else:
+			var rand_slot = randi()%2 + 1
+			auto.translation = spawn_points.get_node(str("Slot",rand_slot)).global_transform.origin
+	
+		vehicles.push_front(auto)
+		add_child(auto)
 	else:
-		var rand_slot = randi()%2 + 1
-		auto.translation = spawn_points.get_node(str("Slot",rand_slot)).global_transform.origin
-
-	vehicles.push_front(auto)
-	add_child(auto)
+		#Don't add the car. TODO: Use a pool to improve memory handling
+		auto.free()
 
 func get_player_slot(spawn_points):
 	if $Jugador.global_transform.origin.x > spawn_points.get_node("Linea1").global_transform.origin.x:
-		return spawn_points.get_node("Slot1").global_transform.origin
+		return spawn_points.get_node("Slot1")
 	if $Jugador.global_transform.origin.x > spawn_points.get_node("Linea2").global_transform.origin.x:
-		return spawn_points.get_node("Slot2").global_transform.origin
+		return spawn_points.get_node("Slot2")
 	else:
-		return spawn_points.get_node("Slot3").global_transform.origin
+		return spawn_points.get_node("Slot3")
 
 func increase_speed():
 	globals.tutorial = false
