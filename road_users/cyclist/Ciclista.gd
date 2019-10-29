@@ -34,6 +34,7 @@ enum HAND_ORIENTATION {LEFT_HAND, RIGHT_HAND, NONE}
 var hand_signal 
 export(float) var validHandSignal
 var handState
+signal game_over_by_healt
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -94,7 +95,6 @@ func check_speed():
 	if(speed > 20):
 		monster_level += 0.05		
 		_set_monster_level()
-#	elif(speed < 20): print("normalVelocity")
 
 func pedal():
 	if(animation_player.current_animation != "ride1" && anim_finished):
@@ -111,7 +111,9 @@ func crash():
 	speed = 0
 	get_node(health_indicator_path).value = health
 	if health <= 0:
+		emit_signal("game_over_by_healt")
 		print('game over')
+		
 		
 
 func monstrify():
@@ -128,7 +130,7 @@ func monstrify():
 func normalize():
 	$ModelRoot/Monster.visible = false
 	$ModelRoot/Ciclista.visible = true
-	$ModelRoot/Ciclista/AnimationPlayer.play("ride")
+	$ModelRoot/Ciclista/AnimationPlayer.play("ride1")
 	for node in get_tree().get_nodes_in_group("environment"):
 		if node.has_method("normalize"):
 			node.normalize()
