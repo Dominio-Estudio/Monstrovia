@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Claxon Bus 2.ogg-53fdbfe6de34027927657595a438abde.oggstr"
+
+[deps]
+
+source_file="res://Sounds/FX/Claxon Bus 2.ogg"
+dest_files=[ "res://.import/Claxon Bus 2.ogg-53fdbfe6de34027927657595a438abde.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

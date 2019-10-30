@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Normalizaed_player.ogg-0ca1de5e82b194288ffb545c7590175a.oggstr"
+
+[deps]
+
+source_file="res://Sounds/FX/Normalizaed_player.ogg"
+dest_files=[ "res://.import/Normalizaed_player.ogg-0ca1de5e82b194288ffb545c7590175a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

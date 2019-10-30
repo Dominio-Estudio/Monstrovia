@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Claxon auto 2.ogg-4d71445b33e2693b434472ea8006444e.oggstr"
+
+[deps]
+
+source_file="res://Sounds/FX/Claxon auto 2.ogg"
+dest_files=[ "res://.import/Claxon auto 2.ogg-4d71445b33e2693b434472ea8006444e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

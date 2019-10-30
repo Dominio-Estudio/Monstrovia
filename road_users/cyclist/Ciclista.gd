@@ -1,3 +1,5 @@
+# Player Script.
+# Important Notice: AnimationPlayer's animations must have same name for cilist and moster
 extends Spatial
 
 const rotation_scale = 10
@@ -98,8 +100,8 @@ func check_speed():
 		_set_monster_level()
 
 func pedal():
-	if(animation_player.current_animation != "ride1" && anim_finished):
-		$ModelRoot/Ciclista/AnimationPlayer.play("ride1")
+	if(animation_player.current_animation != "ride" && anim_finished):
+		$ModelRoot/Ciclista/AnimationPlayer.play("ride")
 
 func stop():
 	if(animation_player.current_animation != "stop"):
@@ -124,6 +126,7 @@ func monstrify():
 	if(monster_level < 100):
 		monster_level = 100
 		_set_monster_level()
+	animation_player = $ModelRoot/Monster/AnimationPlayer #Overwrite animation player
 	$ModelRoot/Monster/AnimationPlayer.play("ride")
 	for node in get_tree().get_nodes_in_group("environment"):
 		if node.has_method("monstrify"):
@@ -133,11 +136,13 @@ func normalize():
 	if($ModelRoot/Monster.visible):
 		$ModelRoot/Monster.visible = false
 		$ModelRoot/Ciclista.visible = true
-		$ModelRoot/Ciclista/AnimationPlayer.play("ride1")
 		$NormalizePlayer.play(0)
+		$ModelRoot/Ciclista/AnimationPlayer.play("ride")
+		animation_player = $ModelRoot/Ciclista/AnimationPlayer #Overwrite animation player
 		for node in get_tree().get_nodes_in_group("environment"):
 			if node.has_method("normalize"):
 				node.normalize()
+	
 	
 func penalty_player():
 	monster_level += monsterPenalty

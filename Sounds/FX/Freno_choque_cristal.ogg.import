@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Freno_choque_cristal.ogg-c22c219c579e1748f9eaf3b800a197f9.oggstr"
+
+[deps]
+
+source_file="res://Sounds/FX/Freno_choque_cristal.ogg"
+dest_files=[ "res://.import/Freno_choque_cristal.ogg-c22c219c579e1748f9eaf3b800a197f9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

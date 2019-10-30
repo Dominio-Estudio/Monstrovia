@@ -49,46 +49,46 @@ material_override = ExtResource( 2 )
 material/0 = ExtResource( 2 )
 
 [node name="casco" parent="." index="1"]
-transform = Transform( 0.0865013, 0.0329751, 0.0054548, 0.0244947, -0.0728408, 0.051902, 0.0227404, -0.0469728, -0.0766552, 0.120316, 0.585515, -0.172888 )
+transform = Transform( 0.0196987, -0.129284, -0.117995, 0.0125095, 0.119477, -0.128818, 0.174587, 0.00602641, 0.0225435, -0.221921, 1.32491, 0.196521 )
 material/0 = ExtResource( 3 )
 
 [node name="marco" parent="." index="2"]
-transform = Transform( -0.00741434, 1.86265e-009, -0.999973, 0.0530805, 0.99859, -0.00039356, 0.998563, -0.0530819, -0.00740385, -0.078842, 0, 0.675318 )
+transform = Transform( -0.00741398, 9.31323e-09, -0.999972, 0.0426639, 0.999089, -0.000316309, 0.999062, -0.0426651, -0.00740719, -0.078842, 0, 0.219643 )
 material_override = ExtResource( 4 )
 material/0 = ExtResource( 4 )
 
 [node name="cadena" parent="marco" index="0"]
-transform = Transform( 0, 1, -1.24767e-006, -1, 0, 6.37357e-009, 6.37357e-009, 1.24767e-006, 1, -0.0532451, 0.214961, -0.12 )
+transform = Transform( 2.80738e-05, 1, 0.00015883, -0.999993, 2.74777e-05, 0.00375057, 0.00375056, -0.000158935, 0.999993, -0.0531876, 0.216263, -0.119739 )
 
 [node name="llantaAtras" parent="marco" index="1"]
-transform = Transform( 1, -0.000203229, 2.7894e-006, 0.000203229, 1, -2.14402e-011, -2.7894e-006, 5.88329e-010, 1, -7.19447e-008, 0.275001, -0.452159 )
+transform = Transform( 1, 3.56702e-09, 1.36009e-09, -3.81203e-09, 0.91394, 0.40585, 2.04636e-10, -0.40585, 0.91394, 3.0268e-09, 0.275001, -0.452159 )
 material_override = ExtResource( 5 )
 material/0 = ExtResource( 5 )
 
 [node name="plato" parent="marco" index="2"]
-transform = Transform( 1, -5.05596e-005, -1.71808e-007, 5.05596e-005, 0.999977, 0.00681822, -1.72922e-007, -0.00681822, 0.999977, -0.000827489, 0.213, -0.111608 )
+transform = Transform( 0.999934, 0.0105275, -0.00450236, -0.0103854, 0.668341, -0.743782, -0.00482103, 0.74378, 0.668407, -0.000827466, 0.213, -0.111608 )
 material_override = ExtResource( 6 )
 
 [node name="pedalL" parent="marco/plato/bielaL" index="0"]
-transform = Transform( 0.196739, 0.0145351, -7.04065e-009, -0.0145351, 0.196739, 7.5136e-009, 7.5751e-009, -6.97442e-009, 0.197275, 3.58408, 0.16096, 1.38326 )
+transform = Transform( 0.171411, 0.0974878, 0.00563281, -0.0974911, 0.171496, -0.00137306, -0.00557528, -0.00159063, 0.19719, 3.58408, 0.160959, 1.38326 )
 material_override = ExtResource( 7 )
 
 [node name="bielaR" parent="marco/plato" index="1"]
 material_override = ExtResource( 8 )
 
 [node name="pedalR" parent="marco/plato/bielaR" index="0"]
-transform = Transform( 0.196758, 0.0142709, 1.11282e-008, -0.0142709, 0.196758, 1.41564e-009, -1.09967e-008, -2.21695e-009, 0.197275, 3.48841, 0.101277, 1.33416 )
+transform = Transform( -0.116077, -0.159452, -0.00429454, 0.159318, -0.115635, -0.0127886, 0.00781938, -0.0109931, 0.196813, 3.48841, 0.101277, 1.33416 )
 material_override = ExtResource( 9 )
 
 [node name="sillin" parent="marco" index="3"]
 material_override = ExtResource( 10 )
 
 [node name="tenedor" parent="marco" index="4"]
-transform = Transform( 1, 7.37616e-007, -4.62937e-011, -7.37616e-007, 1, -9.97517e-005, -2.72848e-011, 9.97517e-005, 1, -5.0466e-008, 3.63121e-009, 1.86265e-009 )
+transform = Transform( 0.999193, 0.0341741, 0.0211196, -0.0349166, 0.998747, 0.0358488, -0.0198681, -0.0365573, 0.999134, -0.0272319, -0.00720611, 0.0200784 )
 material_override = ExtResource( 11 )
 
 [node name="llantaFront" parent="marco/tenedor" index="0"]
-transform = Transform( -0.0038228, -0.00635228, 0.999972, -0.856814, 0.515625, 0, -0.515611, -0.856791, -0.00741386, 0.00274308, 0.274, 0.36999 )
+transform = Transform( -0.00521779, -0.00526684, 0.999972, -0.710413, 0.703785, -2.98023e-08, -0.703766, -0.710393, -0.00741386, 0.00274312, 0.274, 0.36999 )
 material_override = ExtResource( 12 )
 material/0 = ExtResource( 12 )
 
@@ -101,12 +101,12 @@ anims/crash = ExtResource( 14 )
 anims/left_hand = ExtResource( 15 )
 anims/look_sides = ExtResource( 16 )
 anims/montar = ExtResource( 17 )
-anims/ride1 = ExtResource( 18 )
+anims/ride = ExtResource( 18 )
 anims/right_hand = ExtResource( 19 )
 anims/stagger = ExtResource( 20 )
 anims/turn_left = ExtResource( 21 )
 anims/turn_right = ExtResource( 22 )
-blend_times = [ "montar", "crash", 1.0, "montar", "left_hand", 1.0, "montar", "look_sides", 1.0, "montar", "montar", 1.0, "montar", "ride1", 1.0, "montar", "right_hand", 1.0, "montar", "stagger", 1.0, "montar", "turn_left", 1.0, "montar", "turn_right", 1.0 ]
+blend_times = [ "montar", "crash", 1.0, "montar", "left_hand", 1.0, "montar", "look_sides", 1.0, "montar", "montar", 1.0, "montar", "ride", 1.0, "montar", "right_hand", 1.0, "montar", "stagger", 1.0, "montar", "turn_left", 1.0, "montar", "turn_right", 1.0 ]
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="4"]
 tree_root = SubResource( 4 )
