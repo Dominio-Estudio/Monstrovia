@@ -53,5 +53,5 @@ func _process(delta):
 
 func _on_Semaphore_body_entered(body):
 	if(state == STATES.RED):
-		if(body.has_method("monstrify")):
-			body.monstrify()
+		if(body.has_method("penalty_player")):
+			body.penalty_player()
