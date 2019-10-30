@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://autos/auto.gd" type="Script" id=1]
 [ext_resource path="res://autos/vehicle1.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Sounds/FX/Claxon auto 1.ogg" type="AudioStream" id=3]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.56448, 1.29497, 3.79767 )
@@ -32,7 +33,23 @@ enabled = true
 cast_to = Vector3( 0, 0, 5 )
 collide_with_areas = true
 
+[node name="RayCastRight" type="RayCast" parent="."]
+transform = Transform( 1.19249e-008, 0, -1, 0, 1, 0, 1, 0, 1.19249e-008, -1.5, 1, 0.5 )
+enabled = true
+cast_to = Vector3( 0, 0, 2 )
+collide_with_areas = true
+
+[node name="RayCastLeft" type="RayCast" parent="."]
+transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, 1.5, 1, 0.5 )
+enabled = true
+cast_to = Vector3( 0, 0, 2 )
+collide_with_areas = true
+
 [node name="RayCastBack" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -3 )
 cast_to = Vector3( 0, 0, -5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "SoundEffects"
 [connection signal="body_entered" from="." to="." method="_on_Auto_body_entered"]

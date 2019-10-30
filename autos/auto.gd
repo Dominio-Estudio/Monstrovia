@@ -13,6 +13,7 @@ var speed = 0
 enum MODES {FAST, NORMAL, SLOW}
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	pass # Replace with function body.
 
 func _physics_process(delta):
@@ -25,6 +26,14 @@ func _physics_process(delta):
 				speed = 0
 		elif object.is_in_group("semaphore"):
 			random_speed(MODES.SLOW)
+	if($RayCastLeft != null && $RayCastLeft.is_colliding()): check_for_player($RayCastLeft)
+	if($RayCastRight != null && $RayCastRight.is_colliding()): check_for_player($RayCastRight)
+
+func check_for_player(var raycast):
+	var obj = raycast.get_collider()
+	if(obj == player):
+		if(speed > 0 && !$AudioStreamPlayer.is_playing()):			
+			$AudioStreamPlayer.play(0)
 
 func random_speed(mode):
 	match mode:

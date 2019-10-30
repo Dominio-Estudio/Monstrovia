@@ -206,8 +206,9 @@ func _on_InputManager_swiped(gesture):
 		update_ui()
 
 func update_ui():
-	$UI/HUD/Speed/Label.text = str(floor($Jugador.speed)," KM")
-	if($Jugador.speed > 20):
+	var fake_speed = floor($Jugador.speed / $Jugador.offset_speed_change)
+	$UI/HUD/Speed/Label.text = str(fake_speed," KM")
+	if(fake_speed > 20):
 		$UI/HUD/Speed/Label.add_color_override("font_color", Color.red)
 		if(!$UI/HUD/Speed/Label/AnimationPlayer.is_playing()): $UI/HUD/Speed/Label/AnimationPlayer.play("SpeedWarning")
 	else: $UI/HUD/Speed/Label.add_color_override("font_color", Color.white)

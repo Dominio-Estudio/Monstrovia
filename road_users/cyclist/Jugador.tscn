@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://road_users/cyclist/Monster.tscn" type="PackedScene" id=1]
-[ext_resource path="res://road_users/cyclist/Ciclista.gd" type="Script" id=2]
+[ext_resource path="res://road_users/cyclist/Ciclista.gd" type="Script" id=1]
+[ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=2]
 [ext_resource path="res://road_users/cyclist/Ciclista.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=4]
+[ext_resource path="res://road_users/cyclist/Monster.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sounds/FX/Freno_choque_cristal.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Sounds/FX/Normalizaed_player.ogg" type="AudioStream" id=6]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.256705
@@ -16,39 +18,40 @@ height = 0.781073
 [sub_resource type="AnimationNodeStateMachinePlayback" id=3]
 
 [node name="Jugador" type="KinematicBody"]
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 
 [node name="InputManager" type="Node" parent="."]
-script = ExtResource( 4 )
+script = ExtResource( 2 )
 
 [node name="CollisionBackWeel" type="CollisionShape" parent="."]
-transform = Transform( -4.37114e-08, 1, -1.62921e-07, 0, -1.62921e-07, -1, -1, -4.37114e-08, 7.12149e-15, 0.0113965, 0.269758, -0.51967 )
+transform = Transform( -4.37114e-008, 1, -1.62921e-007, 0, -1.62921e-007, -1, -1, -4.37114e-008, 7.12149e-015, 0.0113965, 0.269758, -0.51967 )
 shape = SubResource( 1 )
 
 [node name="CollisionFrontWheel" type="CollisionShape" parent="."]
-transform = Transform( -4.37114e-08, 1, -1.62921e-07, 0, -1.62921e-07, -1, -1, -4.37114e-08, 7.12149e-15, 0.0113965, 0.269758, 0.314994 )
+transform = Transform( -4.37114e-008, 1, -1.62921e-007, 0, -1.62921e-007, -1, -1, -4.37114e-008, 7.12149e-015, 0.0113965, 0.269758, 0.314994 )
 shape = SubResource( 1 )
 
 [node name="CollisionMiddle" type="CollisionShape" parent="."]
-transform = Transform( -4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0.0113965, 1.05656, -0.254262 )
+transform = Transform( -4.37114e-008, -1, -4.37114e-008, 0, -4.37114e-008, 1, -1, 4.37114e-008, 1.91069e-015, 0.0113965, 1.05656, -0.254262 )
 shape = SubResource( 2 )
 
 [node name="ModelRoot" type="Spatial" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.19328, 0, -0.141138 )
+transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, -0.19328, 0, -0.141138 )
 
 [node name="Ciclista" parent="ModelRoot" instance=ExtResource( 3 )]
+editor/display_folded = true
 
 [node name="casco" parent="ModelRoot/Ciclista" index="1"]
 transform = Transform( 0.0148331, -0.0365714, -0.171662, 0.00267438, 0.172301, -0.0364765, 0.175494, 0.000465364, 0.0150651, 0.0216029, 1.45199, 0.211728 )
 
 [node name="marco" parent="ModelRoot/Ciclista" index="2"]
-transform = Transform( -0.0074141, 1.49012e-08, -0.999973, 0.0233799, 0.999727, -0.00017333, 0.999699, -0.0233805, -0.00741208, -0.078842, 0, 0.219643 )
+transform = Transform( -0.0074141, 1.49012e-008, -0.999973, 0.0233799, 0.999727, -0.00017333, 0.999699, -0.0233805, -0.00741208, -0.078842, 0, 0.219643 )
 
 [node name="cadena" parent="ModelRoot/Ciclista/marco" index="0"]
-transform = Transform( 2.80142e-05, 1, 0.000158831, -0.999993, 2.74181e-05, 0.00375057, 0.00375056, -0.000158934, 0.999993, -0.0531296, 0.217045, -0.116434 )
+transform = Transform( 2.80142e-005, 1, 0.000158831, -0.999993, 2.74181e-005, 0.00375057, 0.00375056, -0.000158934, 0.999993, -0.0531296, 0.217045, -0.116434 )
 
 [node name="llantaAtras" parent="ModelRoot/Ciclista/marco" index="1"]
-transform = Transform( 1, -2.43018e-10, -1.48156e-10, -1.05839e-10, -0.800723, 0.599034, -2.64208e-10, -0.599034, -0.800723, 6.28643e-09, 0.275001, -0.452159 )
+transform = Transform( 1, -2.43018e-010, -1.48156e-010, -1.05839e-010, -0.800723, 0.599034, -2.64208e-010, -0.599034, -0.800723, 6.28643e-009, 0.275001, -0.452159 )
 
 [node name="plato" parent="ModelRoot/Ciclista/marco" index="2"]
 transform = Transform( 0.997865, 0.0604827, -0.0246443, -0.0342067, 0.162555, -0.986106, -0.0556363, 0.984844, 0.164277, -0.000827464, 0.213, -0.111608 )
@@ -63,13 +66,22 @@ transform = Transform( 0.0385799, 0.193364, -0.00625524, -0.19342, 0.0384124, -0
 transform = Transform( 0.996678, 0.0436988, 0.0687208, -0.04563, 0.998599, 0.0267873, -0.0674539, -0.029834, 0.997276, -0.043636, -0.00410666, 0.0180742 )
 
 [node name="llantaFront" parent="ModelRoot/Ciclista/marco/tenedor" index="0"]
-transform = Transform( -1.00136e-05, -0.00741384, 0.999972, -0.999999, 0.0013665, 2.98023e-08, -0.00136644, -0.999972, -0.00741386, 0.0027431, 0.274, 0.36999 )
+transform = Transform( -1.00136e-005, -0.00741384, 0.999972, -0.999999, 0.0013665, 2.98023e-008, -0.00136644, -0.999972, -0.00741386, 0.0027431, 0.274, 0.36999 )
 
 [node name="AnimationTree" parent="ModelRoot/Ciclista" index="4"]
 parameters/playback = SubResource( 3 )
 
-[node name="Monster" parent="ModelRoot" instance=ExtResource( 1 )]
+[node name="Monster" parent="ModelRoot" instance=ExtResource( 4 )]
 visible = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -3.0
+
+[node name="NormalizePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = 5.0
+bus = "SoundEffects"
 [connection signal="swiped" from="InputManager" to="." method="_on_InputManager_swiped"]
 [connection signal="animation_finished" from="ModelRoot/Ciclista/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 

@@ -8,6 +8,7 @@ const SENSIBILIDAD = 0.5
 const MAX_SPEED = 30
 const MIN_SPEED = 0
 const SPEED_STEP = 5
+var offset_speed_change = 1.4
 
 var health = 100
 var speed = 0
@@ -84,15 +85,15 @@ func turn(amount, delta):
 		global_transform.origin.x = -8
 
 func modify_speed(step):		
-	speed += step
-	speed = clamp(speed, MIN_SPEED, MAX_SPEED)
+	speed += step * offset_speed_change
+	speed = clamp(speed, MIN_SPEED, MAX_SPEED * offset_speed_change)
 	if speed == 0:
 		stop()
 	else:
 		pedal()
 
 func check_speed():
-	if(speed > 20):
+	if((speed / offset_speed_change) > 21):
 		monster_level += 0.05		
 		_set_monster_level()
 
@@ -106,6 +107,7 @@ func stop():
 
 func crash():
 	penalty_player()
+	$AudioStreamPlayer.play(0)
 	health -= 10
 	$ModelRoot/Ciclista/AnimationPlayer.play("crash")
 	speed = 0
@@ -128,12 +130,14 @@ func monstrify():
 			node.monstrify()
 			
 func normalize():
-	$ModelRoot/Monster.visible = false
-	$ModelRoot/Ciclista.visible = true
-	$ModelRoot/Ciclista/AnimationPlayer.play("ride1")
-	for node in get_tree().get_nodes_in_group("environment"):
-		if node.has_method("normalize"):
-			node.normalize()
+	if($ModelRoot/Monster.visible):
+		$ModelRoot/Monster.visible = false
+		$ModelRoot/Ciclista.visible = true
+		$ModelRoot/Ciclista/AnimationPlayer.play("ride1")
+		$NormalizePlayer.play(0)
+		for node in get_tree().get_nodes_in_group("environment"):
+			if node.has_method("normalize"):
+				node.normalize()
 	
 func penalty_player():
 	monster_level += monsterPenalty
