@@ -437,9 +437,9 @@ __meta__ = {
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -600.0
-margin_right = -6.10352e-005
-margin_bottom = -600.0
+margin_left = 6.10352e-005
+margin_top = -599.507
+margin_bottom = -599.507
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
